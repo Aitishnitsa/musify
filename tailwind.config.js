@@ -5,9 +5,10 @@ module.exports = {
     extend: {
       colors: {
         'customGreen': '#1DB954',
-        'customBlack': '#191414',
+        'customBlack': '#121212',
       },
       fontFamily: {
+        sans: ['Montserrat', 'sans-serif'],
       },
     },
   },
