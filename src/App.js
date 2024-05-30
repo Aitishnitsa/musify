@@ -9,7 +9,7 @@ function App() {
   return (
     <div className='h-screen bg-gradient-to-br from-customGreen to-customBlack'>
       <Router>
-        <header className="bg-customBlack m-0 py-2 px-16 flex items-center justify-between">
+        <header className="h-[7vh] bg-customBlack m-0 py-2 px-16 flex items-center justify-between">
           <a href="https://open.spotify.com/">
             <svg width="121" height="36" viewBox="0 0 121 36" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
