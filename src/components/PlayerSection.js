@@ -5,7 +5,7 @@ import Container from "./Container";
 
 const PlayerSection = ({ imgUrl, name, author }) => {
     return (
-        <Container title={""} className={'col-span-3'}>
+        <Container title={""} className={'col-span-3 h-[85vh]'}>
             <img
                 src={imgUrl}
                 alt="song"

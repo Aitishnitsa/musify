@@ -4,7 +4,7 @@ import Container from "./Container";
 
 const QueueSection = () => {
     return (<>
-        <Container title="Черга" className={'col-span-2'}>
+        <Container title="Черга" className={'col-span-2 h-[85vh]'}>
             <div className="mt-3">
                 <h2 className='font-medium text-sm text-white pb-1'>Відтворюється:</h2>
                 <ListItem></ListItem>

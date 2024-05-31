@@ -4,7 +4,7 @@ import Table from "./Table";
 
 const SearchSection = () => {
     return (<>
-        <Container title={""} className={'col-span-3'}>
+        <Container title={""} className={'col-span-3 h-[85vh]'}>
             <form action="" className="relative mx-auto mb-3">
                 <input type="search"
                     className="text-white border-customGreen peer cursor-pointer z-10 h-12 rounded-full border bg-customBlack pl-12 outline-none w-full" />
