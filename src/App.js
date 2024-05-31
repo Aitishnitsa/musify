@@ -6,12 +6,13 @@ import Search from "./pages/Search";
 import Account from "./pages/Account";
 import { useEffect, useState } from 'react';
 
-function App() {
-  const CLIENT_ID = "ca3e0e1e49734ede96087575dd883493"
-  const REDIRECT_URI = "http://localhost:3000"
-  const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
-  const RESPONSE_TYPE = "token"
+const CLIENT_ID = "ca3e0e1e49734ede96087575dd883493";
+const REDIRECT_URI = "http://localhost:3000";
+const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
+const RESPONSE_TYPE = "token";
+const SCOPES = "user-read-private user-read-email";
 
+function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [token, setToken] = useState("");
 
@@ -37,7 +38,7 @@ function App() {
   const logout = () => {
     setToken("");
     setLoggedIn(false);
-    window.localStorage.removeItem("token")
+    window.localStorage.removeItem("token");
   }
 
   return (<>
@@ -55,7 +56,7 @@ function App() {
           </a>
           <div className='bg-customBlack py-4 px-8 rounded-full'>
             <a
-              href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
+              href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`}
               className='text-4xl font-bold'
             >Login to Spotify</a>
           </div>
