@@ -10,7 +10,7 @@ const CLIENT_ID = "ca3e0e1e49734ede96087575dd883493";
 const REDIRECT_URI = "http://localhost:3000";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
-const SCOPES = "user-read-private user-read-email";
+const SCOPES = "user-read-private user-read-email user-top-read";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -54,12 +54,10 @@ function App() {
                 fill="white" />
             </svg>
           </a>
-          <div className='bg-customBlack py-4 px-8 rounded-full'>
-            <a
-              href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`}
-              className='text-4xl font-bold'
-            >Login to Spotify</a>
-          </div>
+          <a
+            href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`}
+            className='text-4xl font-bold bg-customBlack py-4 px-8 rounded-full'
+          >Login to Spotify</a>
         </div>
         : (
           <Router>

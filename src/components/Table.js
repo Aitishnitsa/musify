@@ -1,7 +1,17 @@
 import React from "react";
 import ListItem from "./ListItem";
 
-const Table = () => {
+const msToTime = (duration) => {
+    let seconds = parseInt((duration / 1000) % 60)
+    let minutes = parseInt((duration / (1000 * 60)) % 60);
+
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return minutes + ":" + seconds;
+}
+
+const Table = ({ array }) => {
     return (<>
         <table className="table-auto text-white w-full text-sm text-left">
             <thead className="border-b-[1px] border-b-customGreen">
@@ -20,36 +30,14 @@ const Table = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><ListItem></ListItem></td>
-                    <td>Synchronicity</td>
-                    <td>4:31</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><ListItem></ListItem></td>
-                    <td>Synchronicity</td>
-                    <td>4:31</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><ListItem></ListItem></td>
-                    <td>Synchronicity</td>
-                    <td>4:31</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><ListItem></ListItem></td>
-                    <td>Synchronicity</td>
-                    <td>4:31</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><ListItem></ListItem></td>
-                    <td>Synchronicity</td>
-                    <td>4:31</td>
-                </tr>
+                {array.map((item, index) => (
+                    <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td><ListItem imgUrl={item.album.images[0]?.url} song={item.name} artist={item.artists[0].name} /></td>
+                        <td>{item.album.name}</td>
+                        <td>{msToTime(item.duration_ms)}</td>
+                    </tr>
+                ))}
             </tbody>
         </table>
     </>);
