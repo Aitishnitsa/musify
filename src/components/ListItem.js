@@ -9,8 +9,8 @@ const ListItem = ({ imgUrl, song, artist }) => {
                 className='h-12 w-12 rounded-sm'
             ></img>
             <div className='pl-2'>
-                <p className='text-white text-base'>{song}</p>
-                <p className='text-white text-base font-extralight'>{artist}</p>
+                <p className='text-white text-base truncate'>{song}</p>
+                <p className='text-white text-base font-extralight truncate'>{artist}</p>
             </div>
         </div>
     );

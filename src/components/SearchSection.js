@@ -17,7 +17,7 @@ const SearchSection = () => {
                     </svg>
                 </div>
             </form>
-            <Table></Table>
+            {/* <Table></Table> */}
         </Container>
     </>);
 }
