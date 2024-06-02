@@ -25,7 +25,7 @@ const PlaylistSection = () => {
     }, [accessToken])
 
     return (<>
-        <Container title={"Плейлисти"} className={'col-span-2 h-[85vh] overflow-y-auto'}>
+        <Container title={"Моя бібліотека"} className={'col-span-2 h-[85vh] overflow-y-auto'}>
             <div className="mt-3">
                 {playlists.map((playlist) => (
                     <ListItem

@@ -8,7 +8,7 @@ const ListItem = ({ imgUrl, song, artist }) => {
                 alt="song"
                 className='h-12 w-12 rounded-sm'
             ></img>
-            <div className='pl-2'>
+            <div className='pl-2 max-w-60'>
                 <p className='text-white text-base truncate'>{song}</p>
                 <p className='text-white text-base font-extralight truncate'>{artist}</p>
             </div>

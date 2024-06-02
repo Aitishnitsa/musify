@@ -2,7 +2,7 @@ import React from "react";
 import ListItem from "./ListItem";
 
 const msToTime = (duration) => {
-    let seconds = parseInt((duration / 1000) % 60)
+    let seconds = parseInt((duration / 1000) % 60);
     let minutes = parseInt((duration / (1000 * 60)) % 60);
 
     minutes = (minutes < 10) ? "0" + minutes : minutes;
@@ -33,7 +33,12 @@ const Table = ({ array }) => {
                 {array.map((item, index) => (
                     <tr key={index}>
                         <td>{index + 1}</td>
-                        <td><ListItem imgUrl={item.album.images[0]?.url} song={item.name} artist={item.artists[0].name} /></td>
+                        <td>
+                            <ListItem
+                                imgUrl={item.album.images[0]?.url}
+                                song={item.name}
+                                artist={item.artists[0].name} />
+                        </td>
                         <td>{item.album.name}</td>
                         <td>{msToTime(item.duration_ms)}</td>
                     </tr>
