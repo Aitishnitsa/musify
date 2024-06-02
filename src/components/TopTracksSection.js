@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Table from '../components/Table';
 import Container from '../components/Container';
-import { CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES } from '../config';
-
-async function fetchWebApi(accessToken) {
-    const res = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=5`, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${accessToken}` }
-    });
-    return await res.json();
-}
+import { CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES, fetchWebApi } from '../config';
 
 const TopTracksSection = () => {
     const [topSongs, setTopSongs] = useState([]);
@@ -18,7 +10,7 @@ const TopTracksSection = () => {
     useEffect(() => {
         const fetchTopSongs = async () => {
             if (accessToken) {
-                const response = await fetchWebApi(accessToken);
+                const response = await fetchWebApi(accessToken, `tracks`);
                 if (response && response.items) {
                     setTopSongs(response.items);
                 } else {

@@ -5,12 +5,7 @@ import Home from './pages/Home';
 import Search from "./pages/Search";
 import Account from "./pages/Account";
 import { useEffect, useState } from 'react';
-
-const CLIENT_ID = "ca3e0e1e49734ede96087575dd883493";
-const REDIRECT_URI = "http://localhost:3000";
-const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-const RESPONSE_TYPE = "token";
-const SCOPES = "user-read-private user-read-email user-top-read";
+import { CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES } from './config';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
