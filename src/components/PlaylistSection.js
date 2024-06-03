@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import ListItem from "./ListItem";
 import Container from "./Container";
-import { CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES, fetchUserPlaylists } from '../config';
+import { accessToken, CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES, fetchUserPlaylists } from '../config';
 
 const PlaylistSection = () => {
     const [playlists, setPlaylists] = useState([]);
-    const accessToken = localStorage.getItem("token");
 
     useEffect(() => {
         const fetchPlaylists = async () => {
             if (accessToken) {
-                const response = await fetchUserPlaylists(accessToken);
+                const response = await fetchUserPlaylists();
                 if (response && response.items) {
                     setPlaylists(response.items);
                 } else {

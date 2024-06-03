@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Container from "./Container";
-import { CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES, fetchProfile } from '../config';
+import { accessToken, CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES, fetchProfile } from '../config';
 
 const UserInfoSection = () => {
     const [profile, setProfile] = useState(null);
-    const accessToken = localStorage.getItem("token");
 
     useEffect(() => {
         const getProfile = async () => {
             if (accessToken) {
-                const profileData = await fetchProfile(accessToken);
+                const profileData = await fetchProfile();
                 if (profileData) {
                     setProfile(profileData);
                 } else {
-                    // Token is invalid, redirect to login
                     window.localStorage.removeItem("token");
                     window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`;
                 }

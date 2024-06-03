@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES, fetchWebApi } from '../config';
+import { accessToken, CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES, fetchWebApi } from '../config';
 
 const useFetchTopItems = (type) => {
     const [items, setItems] = useState([]);
-    const accessToken = localStorage.getItem("token");
 
     useEffect(() => {
         const fetchTopItems = async () => {
             if (accessToken) {
-                const response = await fetchWebApi(accessToken, type);
+                const response = await fetchWebApi(type);
                 if (response && response.items) {
                     setItems(response.items);
                 } else {
