@@ -32,8 +32,8 @@ const SearchSection = () => {
     }, [accessToken, query]);
 
     return (
-        <Container title={""} className={'col-span-3 h-[85vh]'}>
-            <form className="relative mx-auto mb-3">
+        <Container title={""} className={'col-span-3 h-[85vh] overflow-y-auto'}>
+            <form className="sticky top-0 mx-auto mb-3">
                 <input
                     value={query}
                     onChange={handleInputChange}

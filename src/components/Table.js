@@ -33,13 +33,15 @@ const Table = ({ array }) => {
                 {array.map((item, index) => (
                     <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>
+                        <td className="truncate max-w-48">
                             <ListItem
                                 imgUrl={item.album.images[0]?.url}
                                 song={item.name}
-                                artist={item.artists[0].name} />
+                                artist={item.artists[0].name}
+                                className={"max-w-36"}
+                            />
                         </td>
-                        <td>{item.album.name}</td>
+                        <td className="max-w-48">{item.album.name}</td>
                         <td>{msToTime(item.duration_ms)}</td>
                     </tr>
                 ))}
