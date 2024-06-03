@@ -16,7 +16,7 @@ const PlaylistSection = () => {
                     window.localStorage.removeItem("token");
                     window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`;
                 }
-                console.log(playlists);
+                // console.log(playlists);
             }
         }
 
@@ -32,6 +32,7 @@ const PlaylistSection = () => {
                         imgUrl={playlist.images[0]?.url}
                         song={playlist.name}
                         artist={`Плейлист ${playlist.owner.display_name}`}
+                        className={'max-w-60'}
                     />
                 ))}
             </div>

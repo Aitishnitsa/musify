@@ -25,3 +25,5 @@ export const fetchCurrentlyPlaying = () => fetchWithToken(`https://api.spotify.c
 export const fetchQueue = () => fetchWithToken(`https://api.spotify.com/v1/me/player/queue`);
 
 export const fetchSearch = (query) => fetchWithToken(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&offset=0&limit=20`);
+
+export const fetchPlayer = () => fetchWithToken(`https://api.spotify.com/v1/me/player`);
