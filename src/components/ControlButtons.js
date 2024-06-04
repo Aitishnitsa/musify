@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { accessToken, fetchPlayPause, fetchNextPrevious } from '../config';
 
-const ControlButtons = ({ handlePrevious, handleTogglePause, handleNext }) => {
+const ControlButtons = ({ is_playing }) => {
+    const [isPlaying, setIsPlaying] = useState(is_playing);
+
+    const handlePrevious = async (e) => {
+        e.preventDefault();
+        await fetchNextPrevious("previous");
+    }
+
+    const handleTogglePause = async (e) => {
+        e.preventDefault();
+        const action = isPlaying ? "pause" : "play";
+        await fetchPlayPause(action);
+        setIsPlaying(!isPlaying);
+    }
+
+    const handleNext = async (e) => {
+        e.preventDefault();
+        await fetchNextPrevious("next");
+    }
+
+    useEffect(() => {
+        console.log(is_playing);
+    }, [is_playing])
+
     return (
         <div className='flex items-center justify-center'>
             <button onClick={handlePrevious}>
@@ -9,9 +33,15 @@ const ControlButtons = ({ handlePrevious, handleTogglePause, handleNext }) => {
                 </svg>
             </button>
             <button onClick={handleTogglePause} className='mx-4'>
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M24 0C10.7438 0 0 10.7438 0 24C0 37.2562 10.7438 48 24 48C37.2562 48 48 37.2562 48 24C48 10.7438 37.2562 0 24 0ZM34.9219 25.9219L21.4219 34.1719C21.0656 34.3875 20.6531 34.5 20.25 34.5C18.9666 34.5 18 33.45 18 32.25V15.75C18 14.5594 18.9562 13.5 20.25 13.5C20.6572 13.5 21.0636 13.6103 21.4228 13.8296L34.9228 22.0796C35.5875 22.4906 36 23.2125 36 24C36 24.7875 35.5875 25.5094 34.9219 25.9219Z" fill="white" />
-                </svg>
+                {is_playing ?
+                    <svg width="48" height="48" viewBox="0 0 20 20" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zM7 6v8h2V6H7zm4 0v8h2V6h-2z" />
+                    </svg>
+                    :
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 0C10.7438 0 0 10.7438 0 24C0 37.2562 10.7438 48 24 48C37.2562 48 48 37.2562 48 24C48 10.7438 37.2562 0 24 0ZM34.9219 25.9219L21.4219 34.1719C21.0656 34.3875 20.6531 34.5 20.25 34.5C18.9666 34.5 18 33.45 18 32.25V15.75C18 14.5594 18.9562 13.5 20.25 13.5C20.6572 13.5 21.0636 13.6103 21.4228 13.8296L34.9228 22.0796C35.5875 22.4906 36 23.2125 36 24C36 24.7875 35.5875 25.5094 34.9219 25.9219Z" fill="white" />
+                    </svg>
+                }
             </button>
             <button onClick={handleNext}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
