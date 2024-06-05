@@ -18,7 +18,7 @@ const Table = ({ array }) => {
                 <tr>
                     <th className="font-medium">№</th>
                     <th className="font-medium">Назва</th>
-                    <th className="font-medium">Альбом</th>
+                    <th className="font-medium hidden sm:flex">Альбом</th>
                     <th className="font-medium">
                         <div className="flex items-end">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +41,7 @@ const Table = ({ array }) => {
                                 className={"max-w-36"}
                             />
                         </td>
-                        <td className="max-w-48">{item.album.name}</td>
+                        <td className="max-w-48 hidden sm:flex items-center py-2">{item.album.name}</td>
                         <td>{msToTime(item.duration_ms)}</td>
                     </tr>
                 ))}

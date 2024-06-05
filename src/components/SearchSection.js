@@ -32,7 +32,7 @@ const SearchSection = () => {
     }, [accessToken, query]);
 
     return (
-        <Container title={""} className={'col-span-3 h-[85vh] overflow-y-auto'}>
+        <Container title={""} className={'col-span-1 sm:col-span-3 h-[65vh] sm:h-[85vh] overflow-y-auto'}>
             <form className="sticky top-0 mx-auto mb-3">
                 <input
                     value={query}

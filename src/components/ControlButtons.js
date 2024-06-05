@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { accessToken, fetchPlayPause, fetchNextPrevious } from '../config';
+import React, { useState } from "react";
+import { fetchPlayPause, fetchNextPrevious } from '../config';
 
 const ControlButtons = ({ is_playing }) => {
     const [isPlaying, setIsPlaying] = useState(is_playing);
@@ -20,10 +20,6 @@ const ControlButtons = ({ is_playing }) => {
         e.preventDefault();
         await fetchNextPrevious("next");
     }
-
-    useEffect(() => {
-        console.log(is_playing);
-    }, [is_playing])
 
     return (
         <div className='flex items-center justify-center'>

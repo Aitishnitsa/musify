@@ -32,4 +32,4 @@ export const fetchPlayer = () => fetchWithToken(`https://api.spotify.com/v1/me/p
 
 export const fetchPlayPause = (action) => fetchWithToken(`https://api.spotify.com/v1/me/player/${action}`, "PUT");
 
-export const fetchNextPrevious = (action) => fetchWithToken(`https://api.spotify.com/v1/me/player/${action}`, "PUSH");
+export const fetchNextPrevious = (action) => fetchWithToken(`https://api.spotify.com/v1/me/player/${action}`, "POST");
