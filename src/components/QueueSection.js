@@ -53,12 +53,12 @@ const QueueSection = () => {
             </span>
         </div>
         }
-            className={'col-span-2 h-[85vh] overflow-y-auto'} >
+            className={'col-span-1 sm:col-span-2 h-[10vh] sm:h-[85vh] overflow-y-auto'} >
             {queue.length == 0
                 ?
                 <h2 className='font-medium text-sm text-white py-2'>Увімкніть плеєр!</h2>
                 :
-                <div className="mt-3">
+                <div className="mt-3 hidden sm:block">
                     <h2 className='font-medium text-sm text-white pb-1'>Відтворюється:</h2>
                     {currentSong && currentSong.album && (
                         <ListItem

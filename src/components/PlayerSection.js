@@ -26,7 +26,7 @@ const PlayerSection = () => {
     }, [accessToken]);
 
     return (
-        <Container title={""} className={'col-span-3 h-[85vh]'}>
+        <Container title={""} className={'col-span-1 sm:col-span-3 h-[65vh] sm:h-[85vh]'}>
             {player && player.item.album.images ? (
                 <>
                     <img

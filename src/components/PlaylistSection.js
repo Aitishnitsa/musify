@@ -34,8 +34,8 @@ const PlaylistSection = () => {
                 </span>
             </div>
             }
-            className={'col-span-2 h-[85vh] overflow-y-auto'}>
-            <div className="mt-3">
+            className={'col-span-1 sm:col-span-2 h-[10vh] sm:h-[85vh] overflow-y-auto'}>
+            <div className="mt-3 hidden sm:block">
                 {playlists.map((playlist) => (
                     <ListItem
                         key={playlist.id}
