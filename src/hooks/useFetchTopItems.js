@@ -14,7 +14,7 @@ const useFetchTopItems = (type) => {
                     window.localStorage.removeItem("token");
                     window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`;
                 }
-                console.log(items);
+                // console.log(items);
             }
         };
 

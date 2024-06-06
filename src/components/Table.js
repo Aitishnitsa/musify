@@ -1,24 +1,24 @@
 import React from "react";
 import ListItem from "./ListItem";
 
-const msToTime = (duration) => {
-    let seconds = parseInt((duration / 1000) % 60);
-    let minutes = parseInt((duration / (1000 * 60)) % 60);
-
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-    return minutes + ":" + seconds;
-}
-
 const Table = ({ array }) => {
+    const msToTime = (duration) => {
+        let seconds = parseInt((duration / 1000) % 60);
+        let minutes = parseInt((duration / (1000 * 60)) % 60);
+
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return minutes + ":" + seconds;
+    }
+
     return (<>
         <table className="table-auto text-white w-full text-sm text-left">
             <thead className="border-b-[1px] border-b-customGreen">
                 <tr>
                     <th className="font-medium">№</th>
                     <th className="font-medium">Назва</th>
-                    <th className="font-medium">Альбом</th>
+                    <th className="font-medium hidden sm:flex">Альбом</th>
                     <th className="font-medium">
                         <div className="flex items-end">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,8 +31,8 @@ const Table = ({ array }) => {
             </thead>
             <tbody>
                 {array.map((item, index) => (
-                    <tr key={index}>
-                        <td>{index + 1}</td>
+                    <tr key={index} className="rounded transition ease-in-out delay-50 hover:bg-black">
+                        <td className="pl-1.5">{index + 1}</td>
                         <td className="truncate max-w-48">
                             <ListItem
                                 imgUrl={item.album.images[0]?.url}
@@ -41,7 +41,7 @@ const Table = ({ array }) => {
                                 className={"max-w-36"}
                             />
                         </td>
-                        <td className="max-w-48">{item.album.name}</td>
+                        <td className="max-w-48 hidden sm:flex items-center py-2">{item.album.name}</td>
                         <td>{msToTime(item.duration_ms)}</td>
                     </tr>
                 ))}
