@@ -65,7 +65,7 @@ const QueueSection = () => {
                             imgUrl={currentSong.album.images[0]?.url}
                             song={currentSong.name}
                             artist={currentSong.artists[0].name}
-                            className={'max-w-60'}
+                            className={'max-w-56'}
                         />
                     )}
                     <h2 className='font-medium text-sm text-white py-1'>Наступні в черзі:</h2>
@@ -76,7 +76,7 @@ const QueueSection = () => {
                                 imgUrl={item.album.images[0]?.url}
                                 song={item.name}
                                 artist={item.artists[0].name}
-                                className={'max-w-60'}
+                                className={'max-w-56'}
                             />
                         )
                     ))}

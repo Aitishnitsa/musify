@@ -2,7 +2,7 @@ import React from 'react';
 
 const ListItem = ({ imgUrl, song, artist, className }) => {
     return (
-        <div className='flex py-2'>
+        <div className='flex py-2 cursor-pointer border border-transparent transition ease-in-out delay-50 hover:border-b-customGreen'>
             <img
                 src={imgUrl}
                 alt="song"

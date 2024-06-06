@@ -31,8 +31,8 @@ const Table = ({ array }) => {
             </thead>
             <tbody>
                 {array.map((item, index) => (
-                    <tr key={index}>
-                        <td>{index + 1}</td>
+                    <tr key={index} className="rounded transition ease-in-out delay-50 hover:bg-black">
+                        <td className="pl-1.5">{index + 1}</td>
                         <td className="truncate max-w-48">
                             <ListItem
                                 imgUrl={item.album.images[0]?.url}

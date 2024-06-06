@@ -1,10 +1,9 @@
-import './App.css';
 import './index.css';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import Search from "./pages/Search";
 import Account from "./pages/Account";
-import { useEffect, useState } from 'react';
 import Login from './pages/Login';
 import Header from './components/Header';
 
@@ -24,12 +23,17 @@ function App() {
       window.localStorage.setItem("token", token);
     }
 
-    setToken(token);
-
     if (token) {
+      setToken(token);
       setLoggedIn(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, [token]);
 
   const logout = () => {
     setToken("");
@@ -37,7 +41,7 @@ function App() {
     window.localStorage.removeItem("token");
   }
 
-  return (<>
+  return (
     <div className='h-screen text-white bg-gradient-to-br from-customGreen to-customBlack'>
       {!loggedIn ?
         <Login />
@@ -52,8 +56,7 @@ function App() {
         </Router>
       }
     </div>
-  </>
-  )
+  );
 }
 
 export default App;

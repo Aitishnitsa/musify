@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Header = ({ logout }) => {
     const [showMenu, setShowMenu] = useState(true);
-    const [showToggleBtn, setShowToggleBtn] = useState(false)
+    const [showToggleBtn, setShowToggleBtn] = useState(false);
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
