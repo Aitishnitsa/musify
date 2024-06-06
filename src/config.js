@@ -1,4 +1,4 @@
-export const CLIENT_ID = "ca3e0e1e49734ede96087575dd883493";
+export const CLIENT_ID = "your-client-id";
 export const REDIRECT_URI = "http://localhost:3000";
 export const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 export const RESPONSE_TYPE = "token";
@@ -33,3 +33,5 @@ export const fetchPlayer = () => fetchWithToken(`https://api.spotify.com/v1/me/p
 export const fetchPlayPause = (action) => fetchWithToken(`https://api.spotify.com/v1/me/player/${action}`, "PUT");
 
 export const fetchNextPrevious = (action) => fetchWithToken(`https://api.spotify.com/v1/me/player/${action}`, "POST");
+
+export const fetchSearch = (query) => fetchWithToken(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&offset=0&limit=20`);
