@@ -10,15 +10,17 @@ function App() {
   useEffect(() => {
     async function getToken() {
       try {
-        const response = await fetch('/auth/token');
+        // this access token expires in 1 hour! generate new one here: https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started
+        setToken('BQCJMstOLIEFjl-XOyOkjWTDX-Pk_uKbzLLPlsubpc-rIiCFEfc4uv8pQ1n54X3Ob2h_ecZhfhUbSrkFdNxyYAcFzla-EDLWob5hHjscT-tRZaVtclWxplm7LGxaadDuEow_vh4F7kUEKQ5mRJBov_fIo_mGXAqfPN5KaXXrLFgCq1QsiqqrzoyEA-zK71sjIXN6ulZIUT15jY6UFEpfLzcvbTMwcR2V');
+        // const response = await fetch('/auth/token');
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        // if (!response.ok) {
+        //   throw new Error(`HTTP error! status: ${response.status}`);
+        // }
 
-        const json = await response.json();
-        setToken(json.access_token);
-        console.log('Token:', token);
+        // const json = await response.json();
+        // setToken(json.access_token);
+        // console.log('Token:', token);
       } catch (error) {
         console.error('Fetch error:', error);
       }

@@ -12,7 +12,6 @@ const Login = () => {
                         fill="white" />
                 </svg>
             </a>
-            {/* {`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`} */}
             <a
                 href={"/auth/login"}
                 className='text-4xl font-bold bg-customBlack py-4 px-8 rounded-full'
