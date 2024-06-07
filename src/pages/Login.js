@@ -1,5 +1,4 @@
 import React from "react";
-import { CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES } from '../config';
 
 const Login = () => {
     return (
@@ -13,8 +12,9 @@ const Login = () => {
                         fill="white" />
                 </svg>
             </a>
+            {/* {`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`} */}
             <a
-                href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`}
+                href={"/auth/login"}
                 className='text-4xl font-bold bg-customBlack py-4 px-8 rounded-full'
             >Login to Spotify</a>
         </div>
