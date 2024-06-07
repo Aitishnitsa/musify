@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import WebPlayback from './pages/WebPlayback'
-import Login from './pages/Login';
 import './index.css';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import Search from "./pages/Search";
+import Account from "./pages/Account";
+import Login from './pages/Login';
+import Header from './components/Header';
 
 function App() {
   const [token, setToken] = useState('');
@@ -11,7 +16,7 @@ function App() {
     async function getToken() {
       try {
         // this access token expires in 1 hour! generate new one here: https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started
-        setToken('BQCJMstOLIEFjl-XOyOkjWTDX-Pk_uKbzLLPlsubpc-rIiCFEfc4uv8pQ1n54X3Ob2h_ecZhfhUbSrkFdNxyYAcFzla-EDLWob5hHjscT-tRZaVtclWxplm7LGxaadDuEow_vh4F7kUEKQ5mRJBov_fIo_mGXAqfPN5KaXXrLFgCq1QsiqqrzoyEA-zK71sjIXN6ulZIUT15jY6UFEpfLzcvbTMwcR2V');
+        setToken('BQBcgR44BC3nM_ro6hfpW94F1Lm9JeP1Xr4vYnkwIgMvj0FL1eIX1-Wq66QFp5CAgNa_z8OXcgEgrAu31uKbqpapLXxcC5IpTKMTGHYFE_A62vXNBI4pHYaq82T0pXZIyXa0J45vuySElkZerfEnLINJyqkRy2-DY19osVTAZgogo6R-9Sjo48QtjyWjrs5rxtfiNgARG-uHFc6e6LtSaOmXZy8Ian_W');
         // const response = await fetch('/auth/token');
 
         // if (!response.ok) {
@@ -29,74 +34,27 @@ function App() {
     getToken();
   }, [token]);
 
+  const logout = () => {
+    setToken("");
+  }
+
   return (
-    <>
-      {(token === '') ? <Login /> : <WebPlayback token={token} />}
-      {/* {<WebPlayback token={token} />} */}
-    </>
+    <div className='h-screen text-white bg-gradient-to-br from-customGreen to-customBlack'>
+      {(token === '') ?
+        <Login />
+        :
+        // <WebPlayback token={token} />
+        <Router>
+          <Header logout={logout} />
+          <Routes>
+            <Route path="/" element={<Home token={token} />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/account" element={<Account />} />
+          </Routes>
+        </Router>
+      }
+    </div>
   );
 }
 
 export default App;
-
-
-
-// import './App.css';
-// import './index.css';
-// import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-// import Home from './pages/Home';
-// import Search from "./pages/Search";
-// import Account from "./pages/Account";
-// import { useEffect, useState } from 'react';
-// import Login from './pages/Login';
-// import Header from './components/Header';
-
-// function App() {
-//   const [loggedIn, setLoggedIn] = useState(false);
-//   const [token, setToken] = useState("");
-
-//   useEffect(() => {
-//     const hash = window.location.hash;
-//     let token = window.localStorage.getItem("token");
-
-//     if (!token && hash) {
-//       token = hash
-//         .substring(1).split("&").find(element => element.startsWith("access_token")).split("=")[1];
-
-//       window.location.hash = "";
-//       window.localStorage.setItem("token", token);
-//     }
-
-//     setToken(token);
-
-//     if (token) {
-//       setLoggedIn(true);
-//     }
-//   }, []);
-
-//   const logout = () => {
-//     setToken("");
-//     setLoggedIn(false);
-//     window.localStorage.removeItem("token");
-//   }
-
-//   return (<>
-//     <div className='h-screen text-white bg-gradient-to-br from-customGreen to-customBlack'>
-//       {!loggedIn ?
-//         <Login />
-//         :
-//         <Router>
-//           <Header logout={logout} />
-//           <Routes>
-//             <Route path="/" element={<Home />} />
-//             <Route path="/search" element={<Search />} />
-//             <Route path="/account" element={<Account />} />
-//           </Routes>
-//         </Router>
-//       }
-//     </div>
-//   </>
-//   )
-// }
-
-// export default App;
