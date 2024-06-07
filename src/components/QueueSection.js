@@ -1,42 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ListItem from "./ListItem";
 import Container from "./Container";
-import { accessToken, fetchCurrentlyPlaying, fetchQueue } from '../config';
 
-const QueueSection = () => {
-    const [currentSong, setCurrentSong] = useState(null);
-    const [queue, setQueue] = useState([]);
-
-    useEffect(() => {
-        const fetchUserQueue = async () => {
-            if (accessToken) {
-                try {
-                    const response = await fetchCurrentlyPlaying();
-                    if (response && response.item) {
-                        setCurrentSong(response.item);
-                    } else {
-                        setCurrentSong(null);
-                    }
-
-                    const responseQueue = await fetchQueue();
-                    if (responseQueue && responseQueue.queue) {
-                        setQueue(responseQueue.queue);
-                    } else {
-                        setQueue([]);
-                    }
-                } catch (error) {
-                    setCurrentSong(null);
-                    setQueue([]);
-                }
-            }
-        }
-
-        fetchUserQueue();
-
-        const interval = setInterval(fetchUserQueue, 1000);
-        return () => clearInterval(interval);
-    }, [accessToken]);
-
+const QueueSection = ({ is_active, current_track, queue }) => {
     return (
         <Container title={<div className="flex items-center">
             <svg className="mr-1" fill="white" height="24" width="24" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
@@ -54,28 +20,26 @@ const QueueSection = () => {
         </div>
         }
             className={'col-span-1 sm:col-span-2 h-[10vh] sm:h-[85vh] overflow-y-auto'} >
-            {queue.length == 0
+            {!is_active
                 ?
                 <h2 className='font-medium text-sm text-white py-2'>Увімкніть плеєр!</h2>
                 :
                 <div className="mt-3 hidden sm:block">
                     <h2 className='font-medium text-sm text-white pb-1'>Відтворюється:</h2>
-                    {currentSong && currentSong.album && (
-                        <ListItem
-                            imgUrl={currentSong.album.images[0]?.url}
-                            song={currentSong.name}
-                            artist={currentSong.artists[0].name}
-                            className={'max-w-60'}
-                        />
-                    )}
+                    <ListItem
+                        imgUrl={current_track.album?.images[0]?.url || ""}
+                        song={current_track.name}
+                        artist={current_track.artists[0]?.name}
+                        className={'max-w-60'}
+                    />
                     <h2 className='font-medium text-sm text-white py-1'>Наступні в черзі:</h2>
                     {queue.map((item, index) => (
                         item.album && (
                             <ListItem
                                 key={index}
-                                imgUrl={item.album.images[0]?.url}
+                                imgUrl={item.album.images[0]?.url || ""}
                                 song={item.name}
-                                artist={item.artists[0].name}
+                                artist={item.artists[0]?.name}
                                 className={'max-w-60'}
                             />
                         )

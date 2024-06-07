@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import WebPlayback from './pages/WebPlayback'
 import './index.css';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
@@ -16,7 +15,7 @@ function App() {
     async function getToken() {
       try {
         // this access token expires in 1 hour! generate new one here: https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started
-        setToken('BQBcgR44BC3nM_ro6hfpW94F1Lm9JeP1Xr4vYnkwIgMvj0FL1eIX1-Wq66QFp5CAgNa_z8OXcgEgrAu31uKbqpapLXxcC5IpTKMTGHYFE_A62vXNBI4pHYaq82T0pXZIyXa0J45vuySElkZerfEnLINJyqkRy2-DY19osVTAZgogo6R-9Sjo48QtjyWjrs5rxtfiNgARG-uHFc6e6LtSaOmXZy8Ian_W');
+        setToken('BQBfj--DWpxMnrwEJakkpBgwAP0xH3OeT_zORwf9jfNsWmAHVCJ5hchGhODBYeREHmtcco-UsXHEpwvyUesdFVD4LipmWXFUJQpqq2krH60iNqP4ElKNG6k6NnuwmdMKHZJD1jxFZxVdW8hJ1TGFvVyFrFWdoX5XPjTY2ieunRJe6XRWfJFhX0VkMTuTV_UEgo_8DmCEG2KCdAO0uzAI5qEDQ0mZWqXl');
         // const response = await fetch('/auth/token');
 
         // if (!response.ok) {
@@ -43,7 +42,6 @@ function App() {
       {(token === '') ?
         <Login />
         :
-        // <WebPlayback token={token} />
         <Router>
           <Header logout={logout} />
           <Routes>

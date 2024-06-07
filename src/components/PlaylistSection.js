@@ -42,7 +42,7 @@ const PlaylistSection = () => {
                         imgUrl={playlist.images[0]?.url}
                         song={playlist.name}
                         artist={`Плейлист ${playlist.owner.display_name}`}
-                        className={'max-w-60'}
+                        className={'max-w-56'}
                     />
                 ))}
             </div>
