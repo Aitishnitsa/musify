@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ListItem from "./ListItem";
 import Container from "./Container";
-import { accessToken, CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES, fetchUserPlaylists } from '../config';
+import { accessToken, fetchUserPlaylists } from '../config';
 
 const PlaylistSection = () => {
     const [playlists, setPlaylists] = useState([]);
@@ -12,9 +12,6 @@ const PlaylistSection = () => {
                 const response = await fetchUserPlaylists();
                 if (response && response.items) {
                     setPlaylists(response.items);
-                } else {
-                    window.localStorage.removeItem("token");
-                    window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`;
                 }
             }
         }

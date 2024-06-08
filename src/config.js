@@ -4,8 +4,8 @@ export const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 export const RESPONSE_TYPE = "token";
 export const SCOPES = "streaming user-read-email user-read-private user-top-read playlist-read-private user-read-currently-playing user-read-playback-state user-modify-playback-state";
 
-// export const accessToken = localStorage.getItem("token");
-export const accessToken = 'BQCLBL9FINV_1X2oFhoKC_CS7DX3dzqDR6or-fNCdLsqvgV3_7efQYmfKP_Gjn70cG6voHwJ4495TfXkOaj9vt0uE9APelJOIlMeEOGuwL5Z3z8kxbce3nw_SNwUIW9iEyU_atTX8yRwTNcBPTvOKNWftTmBXr0G6xRcMkpu4-y66nV7pJJR5d3P_BaNN5am5wcCSH77-L_OankGGguVEN8ZTaUQNAHW';
+export const accessToken = localStorage.getItem("token");
+// export const accessToken = 'BQDX7UbotsnxFcjfvq0YMq-mgWgFWsJGjQJWyM4VhMSA0HOdSuRjyfBD5zP3O0qMh54NWnHO7o-CRW7aOxpXrS3bBpSlwgXG7oRCjhOOEleFJZjgkzn7ibvNDKtbkdeS601Au4-pRZIsptkqkkhfMhk-MYF3t27ClqxKDUaA4Q17hfyu2-AzL0LjoB-h25AiD4dUr-Npa_sbtAaq1g-mfB0Xp71lPxK7';
 
 const fetchWithToken = async (url, methodType) => {
     const result = await fetch(url, {
