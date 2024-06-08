@@ -15,7 +15,7 @@ function App() {
     async function getToken() {
       try {
         // this access token expires in 1 hour! generate new one here: https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started
-        setToken('BQBfj--DWpxMnrwEJakkpBgwAP0xH3OeT_zORwf9jfNsWmAHVCJ5hchGhODBYeREHmtcco-UsXHEpwvyUesdFVD4LipmWXFUJQpqq2krH60iNqP4ElKNG6k6NnuwmdMKHZJD1jxFZxVdW8hJ1TGFvVyFrFWdoX5XPjTY2ieunRJe6XRWfJFhX0VkMTuTV_UEgo_8DmCEG2KCdAO0uzAI5qEDQ0mZWqXl');
+        setToken('BQCLBL9FINV_1X2oFhoKC_CS7DX3dzqDR6or-fNCdLsqvgV3_7efQYmfKP_Gjn70cG6voHwJ4495TfXkOaj9vt0uE9APelJOIlMeEOGuwL5Z3z8kxbce3nw_SNwUIW9iEyU_atTX8yRwTNcBPTvOKNWftTmBXr0G6xRcMkpu4-y66nV7pJJR5d3P_BaNN5am5wcCSH77-L_OankGGguVEN8ZTaUQNAHW');
         // const response = await fetch('/auth/token');
 
         // if (!response.ok) {
@@ -24,14 +24,14 @@ function App() {
 
         // const json = await response.json();
         // setToken(json.access_token);
-        // console.log('Token:', token);
+        // console.log('Token:', json.access_token);
       } catch (error) {
         console.error('Fetch error:', error);
       }
     }
 
     getToken();
-  }, [token]);
+  }, []);
 
   const logout = () => {
     setToken("");

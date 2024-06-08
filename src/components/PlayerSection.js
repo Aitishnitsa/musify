@@ -11,7 +11,7 @@ const PlayerSection = ({ is_paused, is_active, player, current_track }) => {
                     <img
                         src={current_track.item.album?.images[0]?.url || ""}
                         alt="album cover"
-                        className='rounded-lg overflow-hidden max-h-full object-cover'
+                        className='rounded-lg overflow-hidden max-h-full object-cover w-full'
                     />
                     <div className='flex-grow flex flex-col justify-between mt-2'>
                         <div>
@@ -29,7 +29,9 @@ const PlayerSection = ({ is_paused, is_active, player, current_track }) => {
                     </div>
                 </>
             ) : (
-                <h2 className='font-medium text-sm text-white py-2'>Оберіть пристрій для відтворення у Spotify App</h2>
+                <div className="h-full w-full flex justify-center items-center">
+                    <div class="h-10 w-10 border-t-transparent border-solid animate-spin rounded-full border-white border-4"></div>
+                </div>
             )}
         </Container>
     );

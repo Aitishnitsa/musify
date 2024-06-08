@@ -45,6 +45,18 @@ const Home = (props) => {
 
             player.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
+
+                fetch('https://api.spotify.com/v1/me/player', {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${props.token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        device_ids: [device_id],
+                        play: true
+                    })
+                });
             });
 
             player.addListener('not_ready', ({ device_id }) => {

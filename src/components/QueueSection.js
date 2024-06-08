@@ -22,7 +22,9 @@ const QueueSection = ({ is_active, current_track, queue }) => {
             className={'col-span-1 sm:col-span-2 h-[10vh] sm:h-[85vh] overflow-y-auto'} >
             {!is_active
                 ?
-                <h2 className='font-medium text-sm text-white py-2'>Увімкніть плеєр!</h2>
+                <div className="h-full w-full flex justify-center items-center">
+                    <div class="h-5 w-5 border-t-transparent border-solid animate-spin rounded-full border-white border-4"></div>
+                </div>
                 :
                 <div className="mt-3 hidden sm:block">
                     <h2 className='font-medium text-sm text-white pb-1'>Відтворюється:</h2>
