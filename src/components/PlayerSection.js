@@ -3,6 +3,7 @@ import SeekBar from './SeekBar';
 import ControlButtons from './ControlButtons';
 import Container from "./Container";
 import { accessToken, fetchPlayer } from '../config';
+import Loader from "./Loader";
 
 const PlayerSection = () => {
     const [player, setPlayer] = useState(null);
@@ -50,7 +51,7 @@ const PlayerSection = () => {
                     </div>
                 </>
             ) : (
-                <div>Плеєр недоступний</div>
+                <Loader />
             )}
         </Container>
     );

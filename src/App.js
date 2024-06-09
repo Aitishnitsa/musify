@@ -1,11 +1,13 @@
 import './index.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { fetchPlayPause } from './config';
 import Home from './pages/Home';
 import Search from "./pages/Search";
 import Account from "./pages/Account";
 import Login from './pages/Login';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -35,9 +37,10 @@ function App() {
     }
   }, [token]);
 
-  const logout = () => {
+  const logout = async () => {
     setToken("");
     setLoggedIn(false);
+    await fetchPlayPause('pause');
     window.localStorage.removeItem("token");
   }
 
@@ -53,6 +56,7 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/account" element={<Account />} />
           </Routes>
+          <Footer />
         </Router>
       }
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import ListItem from "./ListItem";
+import { fetchAddToQueue } from '../config';
 
 const Table = ({ array }) => {
     const msToTime = (duration) => {
@@ -31,7 +32,14 @@ const Table = ({ array }) => {
             </thead>
             <tbody>
                 {array.map((item, index) => (
-                    <tr key={index} className="rounded transition ease-in-out delay-50 hover:bg-black">
+                    <tr key={index}
+                        className="rounded transition ease-in-out delay-50 hover:bg-black"
+                        onClick={
+                            async (e) => {
+                                e.preventDefault();
+                                await fetchAddToQueue(item.uri);
+                            }
+                        }>
                         <td className="pl-1.5">{index + 1}</td>
                         <td className="truncate max-w-48">
                             <ListItem
