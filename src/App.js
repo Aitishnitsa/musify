@@ -6,6 +6,7 @@ import Search from "./pages/Search";
 import Account from "./pages/Account";
 import Login from './pages/Login';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -53,6 +54,7 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/account" element={<Account />} />
           </Routes>
+          <Footer />
         </Router>
       }
     </div>

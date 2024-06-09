@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ListItem from "./ListItem";
 import Container from "./Container";
-import { accessToken, fetchCurrentlyPlaying, fetchQueue } from '../config';
+import { accessToken, fetchCurrentlyPlaying, fetchQueue, fetchAddToQueue } from '../config';
 
-const QueueSection = () => {
+const QueueSection = ({ onCurrentClick }) => {
     const [currentSong, setCurrentSong] = useState(null);
     const [queue, setQueue] = useState([]);
 
@@ -66,6 +66,7 @@ const QueueSection = () => {
                             song={currentSong.name}
                             artist={currentSong.artists[0].name}
                             className={'max-w-56'}
+                            onClick={onCurrentClick}
                         />
                     )}
                     <h2 className='font-medium text-sm text-white py-1'>Наступні в черзі:</h2>
@@ -77,6 +78,12 @@ const QueueSection = () => {
                                 song={item.name}
                                 artist={item.artists[0].name}
                                 className={'max-w-56'}
+                                onClick={
+                                    async (e) => {
+                                        e.preventDefault();
+                                        await fetchAddToQueue(item.uri);
+                                    }
+                                }
                             />
                         )
                     ))}

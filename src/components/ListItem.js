@@ -1,8 +1,10 @@
 import React from 'react';
 
-const ListItem = ({ imgUrl, song, artist, className }) => {
+const ListItem = ({ imgUrl, song, artist, className, onClick }) => {
     return (
-        <div className='flex py-2 cursor-pointer border border-transparent transition ease-in-out delay-50 hover:border-b-customGreen'>
+        <div
+            className='flex py-2 cursor-pointer border border-transparent transition ease-in-out delay-50 hover:border-b-customGreen'
+            onClick={onClick} >
             <img
                 src={imgUrl}
                 alt="song"

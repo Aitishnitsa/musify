@@ -7,14 +7,28 @@ export const SCOPES = "user-read-private user-read-email user-top-read playlist-
 export const accessToken = localStorage.getItem("token");
 
 const fetchWithToken = async (url, methodType) => {
-    const result = await fetch(url, {
-        method: methodType,
-        headers: { Authorization: `Bearer ${accessToken}` }
-    });
-    const string = await result.text();
-    const json = string === "" ? {} : JSON.parse(string);
-    return json;
-}
+    try {
+        // console.log("Request URL:", url);
+        // console.log("Access Token:", accessToken);
+
+        const result = await fetch(url, {
+            method: methodType,
+            headers: { Authorization: `Bearer ${accessToken}` }
+        });
+
+        // console.log("Fetch result:", result);
+
+        if (!result.ok) {
+            const error = await result.json();
+            throw new Error(error.message);
+        }
+        const json = await result.json();
+        return json;
+    } catch (error) {
+        console.error("Fetch error:", error);
+        return null;
+    }
+};
 
 export const fetchWebApi = (type) => fetchWithToken(`https://api.spotify.com/v1/me/top/${type}?time_range=short_term&limit=5`, "GET");
 
@@ -33,3 +47,10 @@ export const fetchPlayer = () => fetchWithToken(`https://api.spotify.com/v1/me/p
 export const fetchPlayPause = (action) => fetchWithToken(`https://api.spotify.com/v1/me/player/${action}`, "PUT");
 
 export const fetchNextPrevious = (action) => fetchWithToken(`https://api.spotify.com/v1/me/player/${action}`, "POST");
+
+export const fetchPlaylistsTracks = (playlist_id) => {
+    const url = `https://api.spotify.com/v1/playlists/${playlist_id}`;
+    return fetchWithToken(url, "GET");
+}
+
+export const fetchAddToQueue = (uri) => fetchWithToken(`https://api.spotify.com/v1/me/player/queue?uri=${uri}`, "POST");
