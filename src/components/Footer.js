@@ -28,7 +28,7 @@ const Footer = () => {
 
     return (
         (!isHidden ?
-            <footer className="animate-flip-up absolute bottom-0 border-2 border-transparent border-t-customGreen w-full bg-customBlack m-0 py-2 px-2 md:px-16" >
+            <footer className="animate-fade-up fixed bottom-0 border-2 border-transparent border-t-customGreen w-full bg-customBlack m-0 py-2 px-2 md:px-16" >
                 <div className="relative flex items-center justify-between">
                     <ListItem
                         imgUrl={player.item.album.images[0].url}

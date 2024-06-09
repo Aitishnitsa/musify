@@ -4,6 +4,7 @@ import Table from '../components/Table';
 import Container from "../components/Container";
 import AuthorItem from "../components/AuthorItem";
 import useFetchTopItems from '../hooks/useFetchTopItems';
+import Loader from '../components/Loader';
 
 const Account = () => {
     const topSongs = useFetchTopItems(`tracks`);
@@ -15,17 +16,27 @@ const Account = () => {
                 <UserInfoSection></UserInfoSection>
                 <Container title={"Топ треків у цьому місяці"} className={'row-span-2 col-span-3 hidden sm:block'}>
                     <div className='h-full pt-3'>
-                        <Table array={topSongs}></Table>
+                        {topSongs.length !== 0 ?
+                            <Table array={topSongs}></Table>
+                            :
+                            <Loader />
+                        }
                     </div>
                 </Container>
                 <Container title={"Топ виконавців у цьому місяці"} className={'col-span-3 hidden sm:block'}>
                     <div className='h-full flex justify-between space-x-2 mt-3'>
-                        {topArtists.map((item) => (
-                            <AuthorItem
-                                key={item.id}
-                                imgUrl={item.images[0]?.url}
-                                artist={item.name} />
-                        ))}
+                        {topArtists.length !== 0
+                            ?
+                            topArtists.map((item) => (
+                                <AuthorItem
+                                    key={item.id}
+                                    imgUrl={item.images[0]?.url}
+                                    artist={item.name} />
+                            )
+                            )
+                            :
+                            <Loader />
+                        }
                     </div>
                 </Container>
             </div>

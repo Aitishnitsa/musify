@@ -1,6 +1,7 @@
 import './index.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { fetchPlayPause } from './config';
 import Home from './pages/Home';
 import Search from "./pages/Search";
 import Account from "./pages/Account";
@@ -36,9 +37,10 @@ function App() {
     }
   }, [token]);
 
-  const logout = () => {
+  const logout = async () => {
     setToken("");
     setLoggedIn(false);
+    await fetchPlayPause('pause');
     window.localStorage.removeItem("token");
   }
 
