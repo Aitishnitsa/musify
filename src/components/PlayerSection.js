@@ -1,30 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import SeekBar from './SeekBar';
 import ControlButtons from './ControlButtons';
 import Container from "./Container";
-import { accessToken, fetchPlayer } from '../config';
 import Loader from "./Loader";
+import useFetchPlayer from "../hooks/useFetchPlayer";
 
 const PlayerSection = () => {
-    const [player, setPlayer] = useState(null);
-
-    useEffect(() => {
-        const fetchPlayerData = async () => {
-            if (accessToken) {
-                const response = await fetchPlayer();
-                if (response && response.item) {
-                    setPlayer(response);
-                } else {
-                    setPlayer(null);
-                }
-            }
-        }
-
-        fetchPlayerData();
-
-        const interval = setInterval(fetchPlayerData, 1000);
-        return () => clearInterval(interval);
-    }, [accessToken]);
+    const player = useFetchPlayer();
 
     return (
         <Container title={""} className={'col-span-1 sm:col-span-3 h-[65vh] sm:h-[85vh]'}>
