@@ -10,7 +10,6 @@ const TracksSection = ({ playlist_id }) => {
     useEffect(() => {
         const fetchTracks = async () => {
             if (accessToken) {
-                // console.log("Fetching tracks for playlist:", playlist_id);
                 try {
                     const response = await fetchPlaylistsTracks(playlist_id);
                     if (response && response.tracks && response.tracks.items) {
