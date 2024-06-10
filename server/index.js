@@ -1,5 +1,5 @@
 const express = require('express');
-const request = require('request');
+const axios = require('axios');
 const dotenv = require('dotenv');
 const path = require('path');
 
@@ -41,33 +41,31 @@ app.get('/auth/login', (req, res) => {
     res.redirect('https://accounts.spotify.com/authorize/?' + auth_query_parameters.toString());
 });
 
-app.get('/auth/callback', (req, res) => {
+app.get('/auth/callback', async (req, res) => {
     const code = req.query.code;
 
     const authOptions = {
+        method: 'POST',
         url: 'https://accounts.spotify.com/api/token',
-        form: {
+        data: new URLSearchParams({
             code: code,
             redirect_uri: spotify_redirect_uri,
             grant_type: 'authorization_code'
-        },
+        }),
         headers: {
             'Authorization': 'Basic ' + (Buffer.from(spotify_client_id + ':' + spotify_client_secret).toString('base64')),
             'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        json: true
+        }
     };
 
-    request.post(authOptions, function (error, response, body) {
-        if (error) {
-            console.error('Error:', error);
-        } else if (response.statusCode !== 200) {
-            console.error('Invalid response:', response.statusCode, body);
-        } else {
-            access_token = body.access_token;
-            res.redirect('/');
-        }
-    });
+    try {
+        const response = await axios(authOptions);
+        access_token = response.data.access_token;
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error:', error.response ? error.response.data : error.message);
+        res.status(500).send('Authentication failed');
+    }
 });
 
 app.get('/auth/token', (req, res) => {
@@ -76,9 +74,17 @@ app.get('/auth/token', (req, res) => {
     res.json({ access_token: access_token });
 });
 
-// Serve the React app after defining the API routes
+// Serve the React app
 app.use(express.static(path.join(__dirname, '../build')));
 
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);
 });
+
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../build', 'index.html'));
+// });
+
+app.get("/*", function (req, res) {
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+})

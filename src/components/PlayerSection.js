@@ -1,37 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SeekBar from './SeekBar';
 import ControlButtons from './ControlButtons';
 import Container from "./Container";
+import { accessToken, fetchPlayer } from '../config';
 
-const PlayerSection = ({ is_paused, is_active, player, current_track }) => {
+const PlayerSection = () => {
+    const [player, setPlayer] = useState(null);
+
+    useEffect(() => {
+        const fetchPlayerData = async () => {
+            if (accessToken) {
+                const response = await fetchPlayer();
+                if (response && response.item) {
+                    setPlayer(response);
+                } else {
+                    setPlayer(null);
+                }
+            }
+        }
+
+        fetchPlayerData();
+
+        const interval = setInterval(fetchPlayerData, 1000);
+        return () => clearInterval(interval);
+    }, [accessToken]);
+
     return (
         <Container title={""} className={'col-span-1 sm:col-span-3 h-[65vh] sm:h-[85vh]'}>
-            {is_active ? (
+            {player && player.item.album.images ? (
                 <>
                     <img
-                        src={current_track.item.album?.images[0]?.url || ""}
-                        alt="album cover"
-                        className='rounded-lg overflow-hidden max-h-full object-cover w-full'
-                    />
+                        src={player.item.album.images[0].url}
+                        alt="song"
+                        className='rounded-lg overflow-hidden max-h-full object-cover'
+                    ></img>
                     <div className='flex-grow flex flex-col justify-between mt-2'>
                         <div>
-                            <h1 className='text-white text-lg font-bold'>{current_track.item.name}</h1>
-                            <h2 className='text-white text-base font-light'>{current_track.item.artists[0]?.name}</h2>
+                            <h1 className='text-white text-lg font-bold'>{player.item.name}</h1>
+                            <h2 className='text-white text-base font-light'>{player.item.artists[0].name}</h2>
                         </div>
                         <div>
-                            <ControlButtons player={player} isPaused={is_paused} />
+                            <ControlButtons player={player} />
                             <SeekBar
                                 player={player}
-                                progress={current_track.progress_ms}
-                                duration={current_track.item.duration_ms}
+                                progress={player.progress_ms}
+                                duration={player.item.duration_ms}
                             />
                         </div>
                     </div>
                 </>
             ) : (
-                <div className="h-full w-full flex justify-center items-center">
-                    <div class="h-10 w-10 border-t-transparent border-solid animate-spin rounded-full border-white border-4"></div>
-                </div>
+                <div>oops</div>
             )}
         </Container>
     );

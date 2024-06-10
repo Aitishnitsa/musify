@@ -5,7 +5,6 @@ export const RESPONSE_TYPE = "token";
 export const SCOPES = "streaming user-read-email user-read-private user-top-read playlist-read-private user-read-currently-playing user-read-playback-state user-modify-playback-state";
 
 export const accessToken = localStorage.getItem("token");
-// export const accessToken = 'BQDX7UbotsnxFcjfvq0YMq-mgWgFWsJGjQJWyM4VhMSA0HOdSuRjyfBD5zP3O0qMh54NWnHO7o-CRW7aOxpXrS3bBpSlwgXG7oRCjhOOEleFJZjgkzn7ibvNDKtbkdeS601Au4-pRZIsptkqkkhfMhk-MYF3t27ClqxKDUaA4Q17hfyu2-AzL0LjoB-h25AiD4dUr-Npa_sbtAaq1g-mfB0Xp71lPxK7';
 
 const fetchWithToken = async (url, methodType) => {
     const result = await fetch(url, {
