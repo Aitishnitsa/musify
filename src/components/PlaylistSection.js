@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ListItem from "./ListItem";
 import Container from "./Container";
-import { accessToken, fetchUserPlaylists } from '../config';
+import { fetchUserPlaylists } from '../config';
+import { PlayerContext } from "../context/PlayerContext";
 
 const PlaylistSection = () => {
+    const { token } = useContext(PlayerContext);
     const [playlists, setPlaylists] = useState([]);
 
     useEffect(() => {
         const fetchPlaylists = async () => {
-            if (accessToken) {
-                const response = await fetchUserPlaylists();
+            if (token) {
+                const response = await fetchUserPlaylists(token);
                 if (response && response.items) {
                     setPlaylists(response.items);
                 }
@@ -17,7 +19,7 @@ const PlaylistSection = () => {
         }
 
         fetchPlaylists()
-    }, [accessToken])
+    }, [token])
 
     return (<>
         <Container

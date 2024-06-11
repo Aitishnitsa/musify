@@ -1,106 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useContext, useState } from "react";
 import ControlButtons from "./ControlButtons";
 import SeekBar from "./SeekBar";
 import ListItem from "./ListItem";
+import { PlayerContext } from "../context/PlayerContext";
 
-const initialTrack = {
-    progress_ms: 0,
-    item: {
-        name: "",
-        album: {
-            images: [
-                { url: "" }
-            ]
-        },
-        artists: [
-            { name: "" }
-        ],
-        duration_ms: 0
-    }
-};
-
-const Footer = (props) => {
-    const [isHidden, setIsHidden] = useState(false);
-    const [is_paused, setPaused] = useState(false);
-    const [is_active, setActive] = useState(false);
-    const [player, setPlayer] = useState(null);
-    const [current_track, setTrack] = useState(initialTrack);
-    const intervalRef = useRef();
-
-    useEffect(() => {
-        const script = document.createElement("script");
-        script.src = "https://sdk.scdn.co/spotify-player.js";
-        script.async = true;
-
-        document.body.appendChild(script);
-
-        window.onSpotifyWebPlaybackSDKReady = () => {
-            const player = new window.Spotify.Player({
-                name: 'Web Playback SDK',
-                getOAuthToken: cb => { cb(props.token); },
-                volume: 0.5
-            });
-
-            setPlayer(player);
-
-            player.addListener('ready', ({ device_id }) => {
-                console.log('Ready with Device ID', device_id);
-
-                fetch('https://api.spotify.com/v1/me/player', {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${props.token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        device_ids: [device_id],
-                        play: true
-                    })
-                });
-            });
-
-            player.addListener('not_ready', ({ device_id }) => {
-                console.log('Device ID has gone offline', device_id);
-            });
-
-            player.addListener('player_state_changed', (state) => {
-                if (!state) {
-                    console.log('User is not playing music through the Web Playback SDK');
-                    return;
-                }
-
-                const newTrack = {
-                    progress_ms: state.position,
-                    item: state.track_window.current_track
-                };
-                setTrack(newTrack);
-                setPaused(state.paused);
-
-                player.getCurrentState().then(state => {
-                    if (!state) {
-                        console.error('User is not playing music through the Web Playback SDK');
-                    } else {
-                        setActive(state ? true : false);
-                    }
-                });
-
-                clearInterval(intervalRef.current);
-
-                if (!state.paused) {
-                    intervalRef.current = setInterval(() => {
-                        setTrack(prevTrack => ({
-                            ...prevTrack,
-                            progress_ms: prevTrack.progress_ms + 1000
-                        }));
-                    }, 1000);
-                }
-            });
-
-            player.connect();
-        };
-
-        return () => clearInterval(intervalRef.current);
-    }, []);
+const Footer = () => {
+    const [isHidden, setIsHidden] = useState(true);
+    const { is_paused, is_active, current_track, player } = useContext(PlayerContext);
 
     return (
         (!isHidden ?
@@ -111,9 +17,10 @@ const Footer = (props) => {
                             imgUrl={current_track.item?.album?.images[0]?.url}
                             song={current_track.item?.name}
                             artist={current_track.item?.artists[0]?.name}
+                            className={'max-w-80'}
                         />
                         <div className="absolute left-1/2 right-1/2">
-                            <ControlButtons player={player} isPaused={is_paused} />
+                            {player && <ControlButtons player={player} isPaused={is_paused} />}
                         </div>
                         <button onClick={() => setIsHidden(true)}>
                             <svg fill="white" height="36" width="36" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">

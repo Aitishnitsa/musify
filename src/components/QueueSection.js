@@ -1,41 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ListItem from "./ListItem";
 import Container from "./Container";
-import { accessToken, fetchCurrentlyPlaying, fetchQueue, fetchAddToQueue } from '../config';
+import { fetchQueue } from '../config';
+import { PlayerContext } from "../context/PlayerContext";
 
-const QueueSection = ({ onCurrentClick }) => {
-    const [currentSong, setCurrentSong] = useState(null);
+const QueueSection = () => {
+    const { token, current_track } = useContext(PlayerContext);
     const [queue, setQueue] = useState([]);
 
     useEffect(() => {
         const fetchUserQueue = async () => {
-            if (accessToken) {
+            if (token) {
                 try {
-                    const response = await fetchCurrentlyPlaying();
-                    if (response && response.item) {
-                        setCurrentSong(response.item);
-                    } else {
-                        setCurrentSong(null);
-                    }
-
-                    const responseQueue = await fetchQueue();
+                    const responseQueue = await fetchQueue(token);
                     if (responseQueue && responseQueue.queue) {
                         setQueue(responseQueue.queue);
                     } else {
+                        console.log('fetch queue failed');
                         setQueue([]);
                     }
                 } catch (error) {
-                    setCurrentSong(null);
+                    console.error('fetch queue failed', error);
                     setQueue([]);
                 }
+            } else {
+                console.log('No token available');
             }
         }
 
         fetchUserQueue();
 
-        const interval = setInterval(fetchUserQueue, 1000);
-        return () => clearInterval(interval);
-    }, [accessToken]);
+    }, []);
 
     return (
         <Container title={<div className="flex items-center">
@@ -54,17 +49,17 @@ const QueueSection = ({ onCurrentClick }) => {
         </div>
         }
             className={'col-span-1 sm:col-span-2 h-[10vh] sm:h-[85vh] overflow-y-auto'} >
-            {queue.length == 0
+            {queue.length === 0
                 ?
                 <div>oops</div>
                 :
                 <div className="mt-3 hidden sm:block">
                     <h2 className='font-medium text-sm text-white pb-1'>Відтворюється:</h2>
-                    {currentSong && currentSong.album && (
+                    {current_track && current_track.album && (
                         <ListItem
-                            imgUrl={currentSong.album.images[0]?.url}
-                            song={currentSong.name}
-                            artist={currentSong.artists[0].name}
+                            imgUrl={current_track.album.images[0]?.url}
+                            song={current_track.name}
+                            artist={current_track.artists[0].name}
                             className={'max-w-56'}
                         />
                     )}

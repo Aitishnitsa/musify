@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Container from "./Container";
-import { accessToken, CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES, fetchProfile } from '../config';
+import { fetchProfile } from '../config';
+import { PlayerContext } from "../context/PlayerContext";
 
 const UserInfoSection = () => {
+    const { token } = useContext(PlayerContext);
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
         const getProfile = async () => {
-            if (accessToken) {
-                const profileData = await fetchProfile();
+            if (token) {
+                const profileData = await fetchProfile(token);
                 if (profileData) {
                     setProfile(profileData);
-                } else {
-                    window.localStorage.removeItem("token");
-                    window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`;
                 }
                 // console.log(profile);
             }
         };
 
         getProfile();
-    }, [accessToken]);
+    }, [token]);
 
     return (
         <Container title={""} className={'row-span-3 h-[85vh] text-white'}>

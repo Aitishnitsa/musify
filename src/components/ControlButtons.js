@@ -1,14 +1,19 @@
 import React from "react";
 
 const ControlButtons = ({ player, isPaused }) => {
+    if (!player) {
+        console.error("Player is not initialized");
+        return;
+    }
+
     return (
         <div className='flex items-center justify-center'>
-            <button onClick={() => { player && player.previousTrack() }}>
+            <button onClick={() => { player?.previousTrack() }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M24 1.5V22.5429C24 23.1857 23.3625 23.6143 22.875 23.2714L6.375 12.4286V23.1429C6.375 23.6143 6.0375 24 5.625 24H0.75C0.3375 24 0 23.6143 0 23.1429V0.857143C0 0.385714 0.3375 0 0.75 0H5.625C6.0375 0 6.375 0.385714 6.375 0.857143V11.6143L22.875 0.728572C23.3625 0.428572 24 0.857143 24 1.5Z" fill="white" />
                 </svg>
             </button>
-            <button onClick={() => { player && player.togglePlay() }} className='mx-4'>
+            <button onClick={() => { player?.togglePlay() }} className='mx-4'>
                 {!isPaused ?
                     <svg width="48" height="48" viewBox="0 0 20 20" fill="white" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zM7 6v8h2V6H7zm4 0v8h2V6h-2z" />
@@ -19,7 +24,7 @@ const ControlButtons = ({ player, isPaused }) => {
                     </svg>
                 }
             </button>
-            <button onClick={() => { player && player.nextTrack() }}>
+            <button onClick={() => { player?.nextTrack() }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 1.5V22.5429C0 23.1857 0.6375 23.6143 1.125 23.2714L17.625 12.4286V23.1429C17.625 23.6143 17.9625 24 18.375 24H23.25C23.6625 24 24 23.6143 24 23.1429V0.857143C24 0.385714 23.6625 0 23.25 0H18.375C17.9625 0 17.625 0.385714 17.625 0.857143V11.6143L1.125 0.771428C0.6375 0.428571 0 0.857143 0 1.5Z" fill="white" />
                 </svg>
