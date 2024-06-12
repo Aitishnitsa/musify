@@ -25,7 +25,7 @@ const TracksSection = ({ playlist_id }) => {
         };
 
         fetchTracks();
-        console.log(tracks);
+        // console.log(tracks);
     }, [playlist_id, accessToken]);
 
     const msToTime = (duration) => {
@@ -72,7 +72,7 @@ const TracksSection = ({ playlist_id }) => {
                                         onClick={
                                             async (e) => {
                                                 e.preventDefault();
-                                                await fetchAddToQueue(item.uri);
+                                                await fetchAddToQueue(item.track.uri);
                                             }
                                         }
                                     />

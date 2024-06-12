@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ListItem from "./ListItem";
 import Loader from "./Loader";
 import Container from "./Container";
-import { accessToken, fetchCurrentlyPlaying, fetchQueue, fetchAddToQueue } from '../config';
+import { accessToken, fetchQueue, fetchAddToQueue } from '../config';
+import { PlayerContext } from "../context/PlayerContext";
 
 const QueueSection = ({ onCurrentClick }) => {
-    const [currentSong, setCurrentSong] = useState(null);
+    // const [currentSong, setCurrentSong] = useState(null);
     const [queue, setQueue] = useState([]);
+    const { player } = useContext(PlayerContext)
 
     useEffect(() => {
         const fetchUserQueue = async () => {
             if (accessToken) {
                 try {
-                    const response = await fetchCurrentlyPlaying();
-                    if (response && response.item) {
-                        setCurrentSong(response.item);
-                    } else {
-                        setCurrentSong(null);
-                    }
+                    // const response = await fetchCurrentlyPlaying();
+                    // if (response && response.item) {
+                    //     setCurrentSong(response.item);
+                    // } else {
+                    //     setCurrentSong(null);
+                    // }
 
                     const responseQueue = await fetchQueue();
                     if (responseQueue && responseQueue.queue) {
@@ -26,11 +28,11 @@ const QueueSection = ({ onCurrentClick }) => {
                         setQueue([]);
                     }
                 } catch (error) {
-                    setCurrentSong(null);
+                    // setCurrentSong(null);
                     setQueue([]);
                 }
             }
-        }
+        };
 
         fetchUserQueue();
 
@@ -52,20 +54,18 @@ const QueueSection = ({ onCurrentClick }) => {
             <span>
                 Черга
             </span>
-        </div>
-        }
-            className={'col-span-1 sm:col-span-2 h-[10vh] sm:h-[85vh] overflow-y-auto'} >
-            {queue.length == 0
-                ?
+        </div>}
+            className={'col-span-1 sm:col-span-2 h-[10vh] sm:h-[85vh] overflow-y-auto'}>
+            {queue.length === 0 ? (
                 <Loader />
-                :
+            ) : (
                 <div className="mt-3 hidden sm:block">
                     <h2 className='font-medium text-sm text-white pb-1'>Відтворюється:</h2>
-                    {currentSong && currentSong.album && (
+                    {player && (
                         <ListItem
-                            imgUrl={currentSong.album.images[0]?.url}
-                            song={currentSong.name}
-                            artist={currentSong.artists[0].name}
+                            imgUrl={player.item.album.images[0]?.url}
+                            song={player.item.name}
+                            artist={player.item.artists[0].name}
                             className={'max-w-56'}
                             onClick={onCurrentClick}
                         />
@@ -79,17 +79,15 @@ const QueueSection = ({ onCurrentClick }) => {
                                 song={item.name}
                                 artist={item.artists[0].name}
                                 className={'max-w-56'}
-                                onClick={
-                                    async (e) => {
-                                        e.preventDefault();
-                                        await fetchAddToQueue(item.uri);
-                                    }
-                                }
+                                onClick={async (e) => {
+                                    e.preventDefault();
+                                    await fetchAddToQueue(item.uri);
+                                }}
                             />
                         )
                     ))}
                 </div>
-            }
+            )}
         </Container>
     );
 }

@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { accessToken, fetchPlayer } from "../config";
 
-const useFetchPlayer = () => {
+export const PlayerContext = createContext();
+
+export const PlayerProvider = ({ children }) => {
     const [player, setPlayer] = useState(null);
 
     useEffect(() => {
@@ -10,6 +12,8 @@ const useFetchPlayer = () => {
                 const response = await fetchPlayer();
                 if (response && response.item) {
                     setPlayer(response);
+                } else {
+                    console.log('Error fetching player');
                 }
             }
         }
@@ -20,7 +24,9 @@ const useFetchPlayer = () => {
         return () => clearInterval(interval);
     }, [accessToken]);
 
-    return player;
+    return (
+        <PlayerContext.Provider value={{ player }}>
+            {children}
+        </PlayerContext.Provider>
+    )
 }
-
-export default useFetchPlayer;

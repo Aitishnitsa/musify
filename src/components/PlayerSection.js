@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import SeekBar from './SeekBar';
 import ControlButtons from './ControlButtons';
 import Container from "./Container";
 import Loader from "./Loader";
-import useFetchPlayer from "../hooks/useFetchPlayer";
+import { PlayerContext } from "../context/PlayerContext";
 
 const PlayerSection = () => {
-    const player = useFetchPlayer();
+    const { player } = useContext(PlayerContext);
 
     return (
         <Container title={""} className={'col-span-1 sm:col-span-3 h-[65vh] sm:h-[85vh]'}>
