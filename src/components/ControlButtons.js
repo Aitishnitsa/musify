@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { fetchPlayPause, fetchNextPrevious } from '../config';
+import { PlayerContext } from "../context/PlayerContext";
 
-const ControlButtons = ({ is_playing }) => {
-    const [isPlaying, setIsPlaying] = useState(is_playing);
+const ControlButtons = () => {
+    const { isPlaying } = useContext(PlayerContext)
 
     const handlePrevious = async (e) => {
         e.preventDefault();
@@ -13,7 +14,6 @@ const ControlButtons = ({ is_playing }) => {
         e.preventDefault();
         const action = isPlaying ? "pause" : "play";
         await fetchPlayPause(action);
-        setIsPlaying(!isPlaying);
     }
 
     const handleNext = async (e) => {
@@ -29,7 +29,7 @@ const ControlButtons = ({ is_playing }) => {
                 </svg>
             </button>
             <button onClick={handleTogglePause} className='mx-4'>
-                {is_playing ?
+                {isPlaying ?
                     <svg className="h-8 sm:h-12 w-8 sm:w-12" viewBox="0 0 20 20" fill="white" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zM7 6v8h2V6H7zm4 0v8h2V6h-2z" />
                     </svg>

@@ -1,44 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import ListItem from "./ListItem";
 import Loader from "./Loader";
 import Container from "./Container";
-import { accessToken, fetchQueue, fetchAddToQueue } from '../config';
+import { fetchAddToQueue } from '../config';
 import { PlayerContext } from "../context/PlayerContext";
 
 const QueueSection = ({ onCurrentClick }) => {
-    // const [currentSong, setCurrentSong] = useState(null);
-    const [queue, setQueue] = useState([]);
-    const { player } = useContext(PlayerContext)
-
-    useEffect(() => {
-        const fetchUserQueue = async () => {
-            if (accessToken) {
-                try {
-                    // const response = await fetchCurrentlyPlaying();
-                    // if (response && response.item) {
-                    //     setCurrentSong(response.item);
-                    // } else {
-                    //     setCurrentSong(null);
-                    // }
-
-                    const responseQueue = await fetchQueue();
-                    if (responseQueue && responseQueue.queue) {
-                        setQueue(responseQueue.queue);
-                    } else {
-                        setQueue([]);
-                    }
-                } catch (error) {
-                    // setCurrentSong(null);
-                    setQueue([]);
-                }
-            }
-        };
-
-        fetchUserQueue();
-
-        const interval = setInterval(fetchUserQueue, 1000);
-        return () => clearInterval(interval);
-    }, [accessToken]);
+    const { queue } = useContext(PlayerContext);
+    const { player } = useContext(PlayerContext);
 
     return (
         <Container title={<div className="flex items-center">
