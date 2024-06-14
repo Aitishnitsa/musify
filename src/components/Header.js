@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Header = ({ logout }) => {
     const [showMenu, setShowMenu] = useState(true);
+    const [hoveredItems, setHoveredItems] = useState([]);
     const [showToggleBtn, setShowToggleBtn] = useState(false);
 
     const toggleMenu = () => {
@@ -16,10 +17,59 @@ const Header = ({ logout }) => {
             setShowToggleBtn(false);
             setShowMenu(true);
         }
-    }, [])
+    }, []);
+
+    const handleMouse = (index, state) => {
+        const newHoveredItems = [...hoveredItems];
+        newHoveredItems[index] = state;
+        setHoveredItems(newHoveredItems);
+    };
+
+    const menuItems = [
+        {
+            path: "/",
+            label: "Головна",
+            svg: <svg className='h-8 w-8 fill-none'
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="16" fill="white" />
+                <path d="M14.7451 6.54367C15.6047 5.81878 16.8617 5.81878 17.7213 6.54368L24.6462 12.3833C25.1662 12.8219 25.4664 13.4676 25.4664 14.1479V24.2047C25.4664 25.1962 24.6626 26 23.6711 26H20.0804C19.0888 26 18.285 25.1962 18.285 24.2047V18.5621C18.285 18.4206 18.1702 18.3057 18.0286 18.3057H14.4379C14.2962 18.3057 14.1814 18.4206 14.1814 18.5621V24.2047C14.1814 25.1962 13.3776 26 12.386 26H8.79535C7.8038 26 7 25.1962 7 24.2047V14.1479C7 13.4676 7.30013 12.8219 7.82024 12.3833L14.7451 6.54367ZM16.7292 7.72009C16.4427 7.47846 16.0237 7.47846 15.7372 7.72009L8.81228 13.5597C8.63892 13.7059 8.53887 13.9211 8.53887 14.1479V24.2047C8.53887 24.3463 8.6537 24.4611 8.79535 24.4611H12.386C12.5277 24.4611 12.6425 24.3463 12.6425 24.2047V18.5621C12.6425 17.5706 13.4463 16.7668 14.4379 16.7668H18.0286C19.0201 16.7668 19.8239 17.5706 19.8239 18.5621V24.2047C19.8239 24.3463 19.9387 24.4611 20.0804 24.4611H23.6711C23.8128 24.4611 23.9276 24.3463 23.9276 24.2047V14.1479C23.9276 13.9211 23.8275 13.7059 23.6541 13.5597L16.7292 7.72009Z" fill="#191414" />
+            </svg>
+        },
+        {
+            path: "/search",
+            label: "Пошук",
+            svg: <svg className='h-8 w-8 fill-none'
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="16" fill="white" />
+                <path d="M15.1667 21.8333C18.8486 21.8333 21.8333 18.8486 21.8333 15.1667C21.8333 11.4848 18.8486 8.5 15.1667 8.5C11.4848 8.5 8.5 11.4848 8.5 15.1667C8.5 18.8486 11.4848 21.8333 15.1667 21.8333Z" stroke="#191414" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M23.5 23.5L19.875 19.875" stroke="#191414" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+        },
+        {
+            path: "/account",
+            label: "Профіль",
+            svg: <svg className='h-8 w-8 fill-none'
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="16" fill="white" />
+                <g clipPath="url(#clip0_15_681)">
+                    <path d="M16 25.4167C21.2007 25.4167 25.4167 21.2007 25.4167 16C25.4167 10.7993 21.2007 6.58334 16 6.58334C10.7993 6.58334 6.58333 10.7993 6.58333 16C6.58333 21.2007 10.7993 25.4167 16 25.4167Z" stroke="#191414" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M16 18.4167C13.0833 18.4167 10.5833 20.0834 9.33333 22.5834C11 24.3334 13.4167 25.3334 16 25.3334C18.5833 25.3334 21 24.25 22.6667 22.5834C21.4167 20.1667 18.9167 18.4167 16 18.4167Z" stroke="#191414" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M16 16.25C17.6569 16.25 19 14.9069 19 13.25C19 11.5931 17.6569 10.25 16 10.25C14.3431 10.25 13 11.5931 13 13.25C13 14.9069 14.3431 16.25 16 16.25Z" stroke="#191414" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_15_681">
+                        <rect width="20" height="20" fill="white" transform="translate(6 6)" />
+                    </clipPath>
+                </defs>
+            </svg>
+        }
+    ];
 
     return (
-        <header className="h-[7vh] bg-customBlack m-0 py-2 px-2 md:px-16 flex items-center justify-between">
+        <header className="bg-customBlack m-0 py-2 px-2 md:px-16 flex items-center justify-between">
             <a href="https://open.spotify.com/">
                 <svg width="121" height="36" viewBox="0 0 121 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -31,34 +81,16 @@ const Header = ({ logout }) => {
             </a>
             <nav className='flex'>
                 <div className={`${showMenu && showToggleBtn ? "hidden" : "block"} flex space-x-1 md:space-x-2`}>
-                    <Link to="/">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="16" cy="16" r="16" fill="white" />
-                            <path d="M14.7451 6.54367C15.6047 5.81878 16.8617 5.81878 17.7213 6.54368L24.6462 12.3833C25.1662 12.8219 25.4664 13.4676 25.4664 14.1479V24.2047C25.4664 25.1962 24.6626 26 23.6711 26H20.0804C19.0888 26 18.285 25.1962 18.285 24.2047V18.5621C18.285 18.4206 18.1702 18.3057 18.0286 18.3057H14.4379C14.2962 18.3057 14.1814 18.4206 14.1814 18.5621V24.2047C14.1814 25.1962 13.3776 26 12.386 26H8.79535C7.8038 26 7 25.1962 7 24.2047V14.1479C7 13.4676 7.30013 12.8219 7.82024 12.3833L14.7451 6.54367ZM16.7292 7.72009C16.4427 7.47846 16.0237 7.47846 15.7372 7.72009L8.81228 13.5597C8.63892 13.7059 8.53887 13.9211 8.53887 14.1479V24.2047C8.53887 24.3463 8.6537 24.4611 8.79535 24.4611H12.386C12.5277 24.4611 12.6425 24.3463 12.6425 24.2047V18.5621C12.6425 17.5706 13.4463 16.7668 14.4379 16.7668H18.0286C19.0201 16.7668 19.8239 17.5706 19.8239 18.5621V24.2047C19.8239 24.3463 19.9387 24.4611 20.0804 24.4611H23.6711C23.8128 24.4611 23.9276 24.3463 23.9276 24.2047V14.1479C23.9276 13.9211 23.8275 13.7059 23.6541 13.5597L16.7292 7.72009Z" fill="#191414" />
-                        </svg>
-                    </Link>
-                    <Link to="/search">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="16" cy="16" r="16" fill="white" />
-                            <path d="M15.1667 21.8333C18.8486 21.8333 21.8333 18.8486 21.8333 15.1667C21.8333 11.4848 18.8486 8.5 15.1667 8.5C11.4848 8.5 8.5 11.4848 8.5 15.1667C8.5 18.8486 11.4848 21.8333 15.1667 21.8333Z" stroke="#191414" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M23.5 23.5L19.875 19.875" stroke="#191414" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </Link>
-                    <Link to="/account">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="16" cy="16" r="16" fill="white" />
-                            <g clipPath="url(#clip0_15_681)">
-                                <path d="M16 25.4167C21.2007 25.4167 25.4167 21.2007 25.4167 16C25.4167 10.7993 21.2007 6.58334 16 6.58334C10.7993 6.58334 6.58333 10.7993 6.58333 16C6.58333 21.2007 10.7993 25.4167 16 25.4167Z" stroke="#191414" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M16 18.4167C13.0833 18.4167 10.5833 20.0834 9.33333 22.5834C11 24.3334 13.4167 25.3334 16 25.3334C18.5833 25.3334 21 24.25 22.6667 22.5834C21.4167 20.1667 18.9167 18.4167 16 18.4167Z" stroke="#191414" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M16 16.25C17.6569 16.25 19 14.9069 19 13.25C19 11.5931 17.6569 10.25 16 10.25C14.3431 10.25 13 11.5931 13 13.25C13 14.9069 14.3431 16.25 16 16.25Z" stroke="#191414" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_15_681">
-                                    <rect width="20" height="20" fill="white" transform="translate(6 6)" />
-                                </clipPath>
-                            </defs>
-                        </svg>
-                    </Link>
+                    {menuItems.map((item, index) => (
+                        <Link to={item.path} key={index}>
+                            <div className="relative flex items-center w-full bg-white rounded-full transition ease-in-out delay-500 hover:animate-fade-left animate-duration-100"
+                                onMouseEnter={() => handleMouse(index, true)}
+                                onMouseLeave={() => handleMouse(index, false)}>
+                                {item.svg}
+                                <p className={`${!hoveredItems[index] ? "hidden" : "block"} py-1 pr-2 text-black`}>{item.label}</p>
+                            </div>
+                        </Link>
+                    ))}
                     <button className="text-white" onClick={logout}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21H15" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -80,7 +112,7 @@ const Header = ({ logout }) => {
                     }
                 </button>
             </nav>
-        </header>
+        </header >
     );
 };
 

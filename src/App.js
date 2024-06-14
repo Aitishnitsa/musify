@@ -35,6 +35,8 @@ function App() {
   useEffect(() => {
     if (token) {
       setLoggedIn(true);
+    } else {
+      setLoggedIn(false)
     }
   }, [token]);
 
