@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Container from "./Container";
-import { accessToken, CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES, fetchProfile } from '../config';
+import { accessToken, fetchProfile } from '../config';
 import Loader from "./Loader";
 
 const UserInfoSection = () => {
@@ -13,8 +13,8 @@ const UserInfoSection = () => {
                 if (profileData) {
                     setProfile(profileData);
                 } else {
-                    window.localStorage.removeItem("token");
-                    window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`;
+                    // window.localStorage.removeItem("token");
+                    // window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`;
                 }
                 // console.log(profile);
             }

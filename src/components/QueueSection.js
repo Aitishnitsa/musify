@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import queueImg from "../assets/queue.svg";
 import ListItem from "./ListItem";
 import Loader from "./Loader";
 import Container from "./Container";
@@ -11,15 +12,7 @@ const QueueSection = ({ onCurrentClick }) => {
 
     return (
         <Container title={<div className="flex items-center">
-            <svg className="mr-1" fill="white" height="24" width="24" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                <rect fill="none" height="256" width="256" />
-                <line fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24" x1="88" x2="216" y1="64" y2="64" />
-                <line fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24" x1="88" x2="216" y1="128" y2="128" />
-                <line fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24" x1="88" x2="216" y1="192" y2="192" />
-                <circle cx="44" cy="64" r="12" />
-                <circle cx="44" cy="128" r="12" />
-                <circle cx="44" cy="192" r="12" />
-            </svg>
+            <img src={queueImg} alt='queue' className="mr-1" />
             <span>
                 Черга
             </span>

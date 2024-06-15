@@ -2,13 +2,13 @@ import './index.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchPlayPause } from './config';
+import { PlayerProvider } from './context/PlayerContext';
 import Home from './pages/Home';
 import Search from "./pages/Search";
 import Account from "./pages/Account";
 import Login from './pages/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { PlayerProvider } from './context/PlayerContext';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -55,11 +55,13 @@ function App() {
         <PlayerProvider token={token}>
           <Router>
             <Header logout={logout} />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/account" element={<Account />} />
-            </Routes>
+            <main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/account" element={<Account />} />
+              </Routes>
+            </main>
             <Footer />
           </Router>
         </PlayerProvider>

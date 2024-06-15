@@ -6,7 +6,7 @@ export const PlayerContext = createContext();
 export const PlayerProvider = ({ children }) => {
     const [player, setPlayer] = useState(null);
     const [queue, setQueue] = useState([]);
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
 
     const fetchData = async () => {
         if (accessToken) {
@@ -31,13 +31,17 @@ export const PlayerProvider = ({ children }) => {
         fetchData();
     }, [accessToken]);
 
+    // useEffect(() => {
+    //     player && player.actions.disallows.pausing ? setIsPlaying(false) : setIsPlaying(true);
+    // }, [player?.actions.disallows.pausing, player?.actions.disallows.resuming])
+
     useEffect(() => {
         let interval;
-        // if (isPlaying) {
-        interval = setInterval(fetchData, 1000);
-        // } else {
-        //     interval = setInterval(fetchData, 5000);
-        // }
+        if (isPlaying) {
+            interval = setInterval(fetchData, 1000);
+        } else {
+            interval = setInterval(fetchData, 5000);
+        }
 
         return () => clearInterval(interval);
     }, [isPlaying]);

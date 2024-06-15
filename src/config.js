@@ -40,7 +40,7 @@ export const fetchQueue = () => fetchWithToken(`https://api.spotify.com/v1/me/pl
 
 export const fetchSearch = (query) => fetchWithToken(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&offset=0&limit=20`, "GET");
 
-export const fetchPlayer = () => fetchWithToken(`https://api.spotify.com/v1/me/player`, "GET");
+export const fetchPlayer = () => fetchWithToken(`https://api.spotify.com/v1/me/player/currently-playing`, "GET");
 
 export const fetchPlayPause = (action) => fetchWithToken(`https://api.spotify.com/v1/me/player/${action}`, "PUT");
 
