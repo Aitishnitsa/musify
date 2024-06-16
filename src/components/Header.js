@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from "../assets/logo.svg";
 import home from "../assets/homeMenuItem.svg";
 import search from "../assets/searchMenuItem.svg";
@@ -7,8 +7,10 @@ import exit from "../assets/exit.svg";
 import showMobileMenu from "../assets/showMobileMenu.svg";
 import hideMobileMenu from "../assets/hideMobileMenu.svg";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
-const Header = ({ logout }) => {
+const Header = () => {
+    const { logout } = useContext(AuthContext);
     const [showMenu, setShowMenu] = useState(true);
     const [hoveredItems, setHoveredItems] = useState([]);
     const [showToggleBtn, setShowToggleBtn] = useState(false);

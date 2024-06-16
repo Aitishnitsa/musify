@@ -1,15 +1,17 @@
-import React, { useState, useEffect, createContext } from "react";
-import { accessToken, fetchPlayer, fetchQueue } from "../config";
+import React, { useState, useEffect, createContext, useContext } from "react";
+import { fetchPlayer, fetchQueue } from "../config";
+import { AuthContext } from "./AuthContext";
 
 export const PlayerContext = createContext();
 
 export const PlayerProvider = ({ children }) => {
+    const { token } = useContext(AuthContext);
     const [player, setPlayer] = useState(null);
     const [queue, setQueue] = useState([]);
     const [isPlaying, setIsPlaying] = useState(true);
 
     const fetchData = async () => {
-        if (accessToken) {
+        if (token) {
             const response = await fetchPlayer();
             if (response) {
                 setPlayer(response);
@@ -29,7 +31,7 @@ export const PlayerProvider = ({ children }) => {
 
     useEffect(() => {
         fetchData();
-    }, [accessToken]);
+    }, [token]);
 
     // useEffect(() => {
     //     player && player.actions.disallows.pausing ? setIsPlaying(false) : setIsPlaying(true);
