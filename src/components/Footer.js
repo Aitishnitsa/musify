@@ -20,7 +20,7 @@ const Footer = () => {
                         artist={player?.item?.artists[0]?.name}
                     />
                     <div className="sm:absolute left-1/3 right-1/3">
-                        <ControlButtons is_playing={player.is_playing} />
+                        <ControlButtons is_playing={player?.is_playing} />
                     </div>
                     <button onClick={() => setIsHidden(true)}>
                         <img src={arrowDown} alt='hide footer' className="h-6 w-6 sm:h-9 sm:w-9" />
@@ -28,8 +28,8 @@ const Footer = () => {
                 </div>
                 <SeekBar
                     player={player}
-                    progress={player.progress_ms}
-                    duration={player.item.duration_ms}
+                    progress={player?.progress_ms}
+                    duration={player?.item?.duration_ms}
                 />
             </footer >
             :

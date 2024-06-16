@@ -3,23 +3,21 @@ import playlist from "../assets/playlist.svg";
 import ListItem from "./ListItem";
 import Loader from "./Loader";
 import Container from "./Container";
-import { accessToken, fetchUserPlaylists } from '../config';
+import { fetchUserPlaylists } from '../config';
 
 const PlaylistSection = ({ onClick }) => {
     const [playlists, setPlaylists] = useState([]);
 
     useEffect(() => {
         const fetchPlaylists = async () => {
-            if (accessToken) {
-                const response = await fetchUserPlaylists();
-                if (response && response.items) {
-                    setPlaylists(response.items);
-                }
+            const response = await fetchUserPlaylists();
+            if (response && response.items) {
+                setPlaylists(response.items);
             }
         }
 
         fetchPlaylists()
-    }, [accessToken])
+    }, [])
 
     return (
         <Container

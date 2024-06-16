@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { msToTime } from "../config";
 
 const SeekBar = ({ player, progress, duration }) => {
     const [lineWidth, setLineWidth] = useState(0);
@@ -6,16 +7,6 @@ const SeekBar = ({ player, progress, duration }) => {
     useEffect(() => {
         setLineWidth((progress * 100) / duration);
     }, [progress]);
-
-    const msToTime = (duration) => {
-        let seconds = parseInt((duration / 1000) % 60);
-        let minutes = parseInt((duration / (1000 * 60)) % 60);
-
-        minutes = (minutes < 10) ? "0" + minutes : minutes;
-        seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-        return minutes + ":" + seconds;
-    }
 
     const currentTime = player ? msToTime(progress) : "00:00";
     const trackLength = player ? msToTime(duration) : "00:00";

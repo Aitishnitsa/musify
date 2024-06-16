@@ -25,9 +25,9 @@ const QueueSection = ({ onCurrentClick }) => {
                     <h2 className='font-medium text-sm text-white pb-1'>Відтворюється:</h2>
                     {player && (
                         <ListItem
-                            imgUrl={player.item.album.images[0]?.url}
-                            song={player.item.name}
-                            artist={player.item.artists[0].name}
+                            imgUrl={player?.item?.album?.images[0]?.url}
+                            song={player?.item?.name}
+                            artist={player?.item?.artists[0]?.name}
                             className={'max-w-56'}
                             onClick={onCurrentClick}
                         />

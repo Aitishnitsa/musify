@@ -3,10 +3,8 @@ import search from "../assets/search.svg";
 import Container from "./Container";
 import Table from "./Table";
 import { fetchSearch } from '../config';
-import { useAuth } from "../hooks/useAuth";
 
 const SearchSection = () => {
-    const { token } = useAuth();
     const [query, setQuery] = useState("");
     const [searchResult, setSearchResult] = useState([]);
 
@@ -17,7 +15,7 @@ const SearchSection = () => {
 
     useEffect(() => {
         const fetchQuery = async () => {
-            if (token && query !== "") {
+            if (query !== "") {
                 try {
                     const response = await fetchSearch(query);
                     if (response && response.tracks && response.tracks.items) {
@@ -32,7 +30,7 @@ const SearchSection = () => {
         }
 
         fetchQuery();
-    }, [token, query]);
+    }, [query]);
 
     return (
         <Container title={""} className={'col-span-1 sm:col-span-3 h-[65vh] sm:h-[85vh] overflow-y-auto'}>

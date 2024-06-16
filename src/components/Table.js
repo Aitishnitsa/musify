@@ -1,19 +1,9 @@
 import React from "react";
 import time from "../assets/time.svg";
 import ListItem from "./ListItem";
-import { fetchAddToQueue } from '../config';
+import { msToTime, fetchAddToQueue } from '../config';
 
 const Table = ({ array }) => {
-    const msToTime = (duration) => {
-        let seconds = parseInt((duration / 1000) % 60);
-        let minutes = parseInt((duration / (1000 * 60)) % 60);
-
-        minutes = (minutes < 10) ? "0" + minutes : minutes;
-        seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-        return minutes + ":" + seconds;
-    }
-
     return (<>
         <table className="table-auto text-white w-full text-sm text-left">
             <thead className="border-b-[1px] border-b-customGreen">

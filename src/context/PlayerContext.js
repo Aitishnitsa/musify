@@ -10,46 +10,42 @@ export const PlayerProvider = ({ children }) => {
     const [queue, setQueue] = useState([]);
     const [isPlaying, setIsPlaying] = useState(true);
 
-    const fetchData = async () => {
-        if (token) {
-            const response = await fetchPlayer();
-            if (response) {
-                setPlayer(response);
-                setIsPlaying(response.is_playing);
-            } else {
-                console.log("Can't fetch user's player");
-            }
+    const fetchPlayerData = async () => {
+        const response = await fetchPlayer();
+        if (response) {
+            setPlayer(response);
+            setIsPlaying(response.is_playing);
+        } else {
+            console.log("Can't fetch user's player");
+        }
+    };
 
-            const resQueue = await fetchQueue();
-            if (resQueue && resQueue.queue) {
-                setQueue(resQueue.queue);
-            } else {
-                console.error("Oops... Can't fetch user's queue");
-            }
+    const fetchQueueData = async () => {
+        const response = await fetchQueue();
+        if (response && response.queue) {
+            setQueue(response.queue);
+        } else {
+            console.error("Oops... Can't fetch user's queue");
         }
     };
 
     useEffect(() => {
-        fetchData();
+        fetchPlayerData();
+        fetchQueueData();
     }, [token]);
 
-    // useEffect(() => {
-    //     player && player.actions.disallows.pausing ? setIsPlaying(false) : setIsPlaying(true);
-    // }, [player?.actions.disallows.pausing, player?.actions.disallows.resuming])
+    useEffect(() => {
+        let interval = setInterval(fetchPlayerData, 1000);
+        return () => clearInterval(interval);
+    }, [isPlaying]);
 
     useEffect(() => {
-        let interval;
-        if (isPlaying) {
-            interval = setInterval(fetchData, 1000);
-        } else {
-            interval = setInterval(fetchData, 5000);
-        }
-
+        let interval = setInterval(fetchQueueData, player?.item?.duration_ms ?? 10000);
         return () => clearInterval(interval);
     }, [isPlaying]);
 
     return (
-        <PlayerContext.Provider value={{ player, queue, isPlaying }}>
+        <PlayerContext.Provider value={{ player, queue, isPlaying, setIsPlaying }}>
             {children}
         </PlayerContext.Provider>
     );

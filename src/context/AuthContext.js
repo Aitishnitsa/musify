@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState, useContext } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { fetchPlayPause } from '../config';
 
 export const AuthContext = createContext();
@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const hash = window.location.hash;
         let token = window.localStorage.getItem("token");
-        let tokenExpiry = window.localStorage.getItem("tokenExpiry")
+        let tokenExpiry = window.localStorage.getItem("tokenExpiry");
 
         if (!token && hash) {
             token = hash
@@ -50,11 +50,12 @@ export const AuthProvider = ({ children }) => {
         await fetchPlayPause('pause');
         window.localStorage.removeItem("token");
         window.localStorage.removeItem("tokenExpiry");
+        window.location.reload();
     }
 
     return (
         <AuthContext.Provider value={{ token, loggedIn, logout }}>
             {children}
         </AuthContext.Provider>
-    )
-} 
+    );
+}

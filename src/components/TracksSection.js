@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ListItem from './ListItem';
 import Container from "./Container";
-import { accessToken, fetchPlaylistsTracks, fetchAddToQueue } from '../config';
+import { msToTime, fetchPlaylistsTracks, fetchAddToQueue } from '../config';
 
 const TracksSection = ({ playlist_id }) => {
     const [tracks, setTracks] = useState([]);
@@ -9,34 +9,21 @@ const TracksSection = ({ playlist_id }) => {
 
     useEffect(() => {
         const fetchTracks = async () => {
-            if (accessToken) {
-                try {
-                    const response = await fetchPlaylistsTracks(playlist_id);
-                    if (response && response.tracks && response.tracks.items) {
-                        setCurrentPlaylist(response);
-                        setTracks(response.tracks.items);
-                    } else {
-                        console.error("Response Error:", response);
-                    }
-                } catch (error) {
-                    console.error("Error fetching tracks:", error);
+            try {
+                const response = await fetchPlaylistsTracks(playlist_id);
+                if (response && response.tracks && response.tracks.items) {
+                    setCurrentPlaylist(response);
+                    setTracks(response.tracks.items);
+                } else {
+                    console.error("Response Error:", response);
                 }
+            } catch (error) {
+                console.error("Error fetching tracks:", error);
             }
-        };
+        }
 
         fetchTracks();
-        // console.log(tracks);
-    }, [playlist_id, accessToken]);
-
-    const msToTime = (duration) => {
-        let seconds = parseInt((duration / 1000) % 60);
-        let minutes = parseInt((duration / (1000 * 60)) % 60);
-
-        minutes = (minutes < 10) ? "0" + minutes : minutes;
-        seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-        return minutes + ":" + seconds;
-    }
+    }, [playlist_id]);
 
     return (
         <Container title={""} className={'col-span-1 sm:col-span-3 h-[65vh] sm:h-[85vh] overflow-y-auto'}>

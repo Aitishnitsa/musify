@@ -70,7 +70,7 @@ const Header = () => {
                         </Link>
                     ))}
                     <button className="text-white" onClick={logout}>
-                        <img src={exit} />
+                        <img src={exit} alt='exit' />
                     </button>
                 </div>
                 <button className={showToggleBtn ? "block" : "hidden"} onClick={toggleMenu} >
