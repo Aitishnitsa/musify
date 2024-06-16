@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import useScreenSize from '../hooks/useScreenSize';
 import logo from "../assets/logo.svg";
 import home from "../assets/homeMenuItem.svg";
 import search from "../assets/searchMenuItem.svg";
@@ -14,13 +15,14 @@ const Header = () => {
     const [showMenu, setShowMenu] = useState(true);
     const [hoveredItems, setHoveredItems] = useState([]);
     const [showToggleBtn, setShowToggleBtn] = useState(false);
+    const screenSize = useScreenSize();
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
 
     useEffect(() => {
-        if (window.innerWidth < 768) {
+        if (screenSize.width < 768) {
             setShowToggleBtn(true);
         } else {
             setShowToggleBtn(false);
