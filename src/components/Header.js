@@ -28,7 +28,7 @@ const Header = () => {
             setShowToggleBtn(false);
             setShowMenu(true);
         }
-    }, []);
+    }, [screenSize.width]);
 
     const handleMouse = (index, state) => {
         const newHoveredItems = [...hoveredItems];

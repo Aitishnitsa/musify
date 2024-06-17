@@ -6,7 +6,7 @@ const SeekBar = ({ player, progress, duration }) => {
 
     useEffect(() => {
         setLineWidth((progress * 100) / duration);
-    }, [progress]);
+    }, [progress, duration]);
 
     const currentTime = player ? msToTime(progress) : "00:00";
     const trackLength = player ? msToTime(duration) : "00:00";

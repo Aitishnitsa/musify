@@ -1,8 +1,13 @@
 import React from "react";
 import logo from "../assets/logo.svg";
-import { CLIENT_ID, REDIRECT_URI, AUTH_ENDPOINT, RESPONSE_TYPE, SCOPES } from '../config';
 
 const Login = () => {
+    const AUTH_ENDPOINT = process.env.REACT_APP_AUTH_ENDPOINT;
+    const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+    const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+    const RESPONSE_TYPE = process.env.REACT_APP_RESPONSE_TYPE;
+    const SCOPES = process.env.REACT_APP_SCOPES;
+
     return (
         <div className='h-full flex flex-col justify-center items-center space-y-4'>
             <a href="https://open.spotify.com/">

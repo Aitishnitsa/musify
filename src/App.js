@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 import { PlayerProvider } from './context/PlayerContext';
 import { useAuth } from './hooks/useAuth';
 
-function App() {
+const AppContent = () => {
   const { loggedIn } = useAuth();
 
   return (
@@ -36,8 +36,10 @@ function App() {
   );
 }
 
-export default () => (
+const App = () => (
   <AuthProvider>
-    <App />
+    <AppContent />
   </AuthProvider>
 );
+
+export default App;

@@ -9,12 +9,14 @@ export const PlayerProvider = ({ children }) => {
     const [player, setPlayer] = useState(null);
     const [queue, setQueue] = useState([]);
     const [isPlaying, setIsPlaying] = useState(true);
+    const [currentSongId, setId] = useState('');
 
     const fetchPlayerData = async () => {
         const response = await fetchPlayer();
         if (response) {
             setPlayer(response);
             setIsPlaying(response.is_playing);
+            setId(response.item?.id);
         } else {
             console.log("Can't fetch user's player");
         }
@@ -35,17 +37,16 @@ export const PlayerProvider = ({ children }) => {
     }, [token]);
 
     useEffect(() => {
-        let interval = setInterval(fetchPlayerData, 1000);
+        const interval = setInterval(fetchPlayerData, 1000);
         return () => clearInterval(interval);
     }, [isPlaying]);
 
     useEffect(() => {
-        let interval = setInterval(fetchQueueData, player?.item?.duration_ms ?? 10000);
-        return () => clearInterval(interval);
-    }, [isPlaying]);
+        fetchQueueData();
+    }, [currentSongId]);
 
     return (
-        <PlayerContext.Provider value={{ player, queue, isPlaying, setIsPlaying }}>
+        <PlayerContext.Provider value={{ player, queue, isPlaying }}>
             {children}
         </PlayerContext.Provider>
     );
