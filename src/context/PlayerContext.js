@@ -46,7 +46,7 @@ export const PlayerProvider = ({ children }) => {
     }, [currentSongId]);
 
     return (
-        <PlayerContext.Provider value={{ player, queue, isPlaying }}>
+        <PlayerContext.Provider value={{ player, queue, isPlaying, fetchQueueData }}>
             {children}
         </PlayerContext.Provider>
     );

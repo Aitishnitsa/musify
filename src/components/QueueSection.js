@@ -7,8 +7,7 @@ import { fetchAddToQueue } from '../config';
 import { PlayerContext } from "../context/PlayerContext";
 
 const QueueSection = ({ onCurrentClick }) => {
-    const { queue } = useContext(PlayerContext);
-    const { player } = useContext(PlayerContext);
+    const { player, queue, fetchQueueData } = useContext(PlayerContext);
 
     return (
         <Container title={<div className="flex items-center">
@@ -44,6 +43,7 @@ const QueueSection = ({ onCurrentClick }) => {
                                 onClick={async (e) => {
                                     e.preventDefault();
                                     await fetchAddToQueue(item.uri);
+                                    fetchQueueData();
                                 }}
                             />
                         )

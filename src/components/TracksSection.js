@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ListItem from './ListItem';
 import Container from "./Container";
 import { msToTime, fetchPlaylistsTracks, fetchAddToQueue } from '../config';
+import { PlayerContext } from "../context/PlayerContext";
 
 const TracksSection = ({ playlist_id }) => {
+    const { fetchQueueData } = useContext(PlayerContext);
     const [tracks, setTracks] = useState([]);
     const [currentPlaylist, setCurrentPlaylist] = useState(null);
 
@@ -60,6 +62,7 @@ const TracksSection = ({ playlist_id }) => {
                                             async (e) => {
                                                 e.preventDefault();
                                                 await fetchAddToQueue(item.track.uri);
+                                                fetchQueueData();
                                             }
                                         }
                                     />

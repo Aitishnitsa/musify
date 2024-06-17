@@ -25,16 +25,13 @@ const Account = () => {
                 </Container>
                 <Container title={"Топ виконавців у цьому місяці"} className={'col-span-3 hidden sm:block'}>
                     <div className='h-full flex justify-between space-x-2 mt-3'>
-                        {topArtists.length !== 0
-                            ?
+                        {topArtists.length !== 0 ?
                             topArtists.map((item) => (
                                 <AuthorItem
                                     key={item.id}
                                     imgUrl={item.images[0]?.url}
                                     artist={item.name} />
-                            )
-                            )
-                            :
+                            )) :
                             <Loader />
                         }
                     </div>

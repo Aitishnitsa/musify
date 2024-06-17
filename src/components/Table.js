@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import time from "../assets/time.svg";
 import ListItem from "./ListItem";
 import { msToTime, fetchAddToQueue } from '../config';
+import { PlayerContext } from "../context/PlayerContext";
 
 const Table = ({ array }) => {
+    const { fetchQueueData } = useContext(PlayerContext);
+
     return (<>
         <table className="table-auto text-white w-full text-sm text-left">
             <thead className="border-b-[1px] border-b-customGreen">
@@ -26,6 +29,7 @@ const Table = ({ array }) => {
                             async (e) => {
                                 e.preventDefault();
                                 await fetchAddToQueue(item.uri);
+                                fetchQueueData();
                             }
                         }>
                         <td className="pl-1.5">{index + 1}</td>

@@ -32,7 +32,7 @@ const fetchWithToken = async (url, methodType) => {
             }
             return await result.json();
         } catch (error) {
-            console.error("Fetch error:", error);
+            // console.error("Fetch error:", error);
             return null;
         }
     }
