@@ -3,12 +3,13 @@ import UserInfoSection from '../components/UserInfoSection';
 import Table from '../components/Table';
 import Container from "../components/Container";
 import AuthorItem from "../components/AuthorItem";
-import useFetchTopItems from '../hooks/useFetchTopItems';
 import Loader from '../components/Loader';
+import { fetchWebApi } from '../config';
+import useFetchData from '../hooks/useFetchData';
 
 const Account = () => {
-    const topSongs = useFetchTopItems(`tracks`);
-    const topArtists = useFetchTopItems(`artists`);
+    const topSongs = useFetchData(fetchWebApi, 'array', `tracks`);
+    const topArtists = useFetchData(fetchWebApi, 'array', `artists`);
 
     return (
         <div className='h-[93vh] flex justify-center items-center'>

@@ -1,23 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import playlist from "../assets/playlist.svg";
 import ListItem from "./ListItem";
 import Loader from "./Loader";
 import Container from "./Container";
 import { fetchUserPlaylists } from '../config';
+import useFetchData from "../hooks/useFetchData";
 
 const PlaylistSection = ({ onClick }) => {
-    const [playlists, setPlaylists] = useState([]);
-
-    useEffect(() => {
-        const fetchPlaylists = async () => {
-            const response = await fetchUserPlaylists();
-            if (response && response.items) {
-                setPlaylists(response.items);
-            }
-        }
-
-        fetchPlaylists()
-    }, [])
+    const playlists = useFetchData(fetchUserPlaylists, 'array');
 
     return (
         <Container

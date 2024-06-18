@@ -1,23 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Container from "./Container";
 import { fetchProfile } from '../config';
 import Loader from "./Loader";
+import useFetchData from "../hooks/useFetchData";
 
 const UserInfoSection = () => {
-    const [profile, setProfile] = useState(null);
-
-    useEffect(() => {
-        const getProfile = async () => {
-            const profileData = await fetchProfile();
-            if (profileData) {
-                setProfile(profileData);
-            } else {
-                setProfile(null);
-            }
-        }
-
-        getProfile();
-    }, []);
+    const profile = useFetchData(fetchProfile, 'item');
 
     return (
         <Container title={""} className={'row-span-3 h-[85vh] text-white'}>

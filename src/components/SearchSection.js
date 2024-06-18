@@ -1,36 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import search from "../assets/search.svg";
 import Container from "./Container";
 import Table from "./Table";
 import { fetchSearch } from '../config';
+import useFetchData from "../hooks/useFetchData";
 
 const SearchSection = () => {
     const [query, setQuery] = useState("");
-    const [searchResult, setSearchResult] = useState([]);
+    const searchResult = useFetchData(fetchSearch, 'array', query);
 
     const handleInputChange = (e) => {
         e.preventDefault();
         setQuery(e.target.value);
     }
-
-    useEffect(() => {
-        const fetchQuery = async () => {
-            if (query !== "") {
-                try {
-                    const response = await fetchSearch(query);
-                    if (response && response.tracks && response.tracks.items) {
-                        setSearchResult(response.tracks.items);
-                    } else {
-                        console.log('No items found');
-                    }
-                } catch (error) {
-                    console.log('Error fetching search results:', error);
-                }
-            }
-        }
-
-        fetchQuery();
-    }, [query]);
 
     return (
         <Container title={""} className={'col-span-1 sm:col-span-3 h-[65vh] sm:h-[85vh] overflow-y-auto'}>
