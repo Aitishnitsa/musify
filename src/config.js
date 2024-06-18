@@ -46,9 +46,8 @@ export const fetchPlayPause = (action) => fetchWithToken(`https://api.spotify.co
 
 export const fetchNextPrevious = (action) => fetchWithToken(`https://api.spotify.com/v1/me/player/${action}`, "POST");
 
-export const fetchPlaylistsTracks = (playlist_id) => {
-    const url = `https://api.spotify.com/v1/playlists/${playlist_id}`;
-    return fetchWithToken(url, "GET");
-}
+export const fetchPlaylistsTracks = (playlist_id) => fetchWithToken(`https://api.spotify.com/v1/playlists/${playlist_id}`, "GET");
 
 export const fetchAddToQueue = (uri) => fetchWithToken(`https://api.spotify.com/v1/me/player/queue?uri=${uri}`, "POST");
+
+export const fetchSeek = (progress) => fetchWithToken(`https://api.spotify.com/v1/me/player/seek?position_ms=${progress}`, "PUT");
