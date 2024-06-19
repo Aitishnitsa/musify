@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import './index.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
@@ -15,6 +15,7 @@ const AppContent = () => {
   const { loggedIn } = useAuth();
 
   return (
+    // animate-color-change-2x
     <div className='h-screen text-white bg-gradient-to-br from-customGreen to-customBlack'>
       {!loggedIn ?
         <Login />

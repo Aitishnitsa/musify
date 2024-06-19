@@ -10,6 +10,15 @@ module.exports = {
       fontFamily: {
         sans: ['Montserrat', 'sans-serif'],
       },
+      keyframes: {
+        'color-change-2x': {
+          '0%': { background: '#1DB954' },
+          '100%': { background: '#121212' },
+        },
+      },
+      animation: {
+        'color-change-2x': 'color-change-2x 5s linear infinite alternate both',
+      },
     },
   },
   plugins: [

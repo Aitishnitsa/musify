@@ -24,12 +24,12 @@ const PlaylistSection = ({ onClick }) => {
                 <div className="mt-3 hidden sm:block">
                     {playlists.map((playlist) => (
                         <ListItem
-                            key={playlist.id}
-                            imgUrl={playlist.images[0]?.url}
+                            key={playlist?.id}
+                            imgUrl={playlist?.images[0]?.url}
                             song={playlist.name}
-                            artist={`Плейлист ${playlist.owner.display_name}`}
+                            artist={`Плейлист ${playlist?.owner?.display_name}`}
                             className={'max-w-56'}
-                            onClick={() => onClick(playlist.id)}
+                            onClick={() => onClick(playlist?.id)}
                         />
                     ))}
                 </div>
