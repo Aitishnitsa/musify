@@ -7,7 +7,7 @@ import useFetchData from "../hooks/useFetchData";
 
 const SearchSection = () => {
     const [query, setQuery] = useState("");
-    const searchResult = useFetchData(fetchSearch, 'array', query);
+    const searchResult = useFetchData(fetchSearch, 'tracks', query);
 
     const handleInputChange = (e) => {
         e.preventDefault();

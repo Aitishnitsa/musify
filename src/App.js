@@ -16,7 +16,7 @@ const AppContent = () => {
 
   return (
     // animate-color-change-2x
-    <div className='h-screen text-white bg-gradient-to-br from-customGreen to-customBlack'>
+    <div className='h-full sm:h-screen text-white bg-gradient-to-br from-customGreen to-customBlack'>
       {!loggedIn ?
         <Login />
         :

@@ -15,9 +15,11 @@ const Header = () => {
     const [showMenu, setShowMenu] = useState(true);
     const [hoveredItems, setHoveredItems] = useState([]);
     const [showToggleBtn, setShowToggleBtn] = useState(false);
+    const [menuToggleAnimation, setMenuToggleAnimation] = useState(false);
     const screenSize = useScreenSize();
 
     const toggleMenu = () => {
+        setMenuToggleAnimation(true);
         setShowMenu(!showMenu);
     };
 
@@ -55,7 +57,7 @@ const Header = () => {
     ];
 
     return (
-        <header className="bg-customBlack m-0 py-2 px-2 md:px-16 flex items-center justify-between">
+        <header className="h-[7vh] bg-customBlack m-0 py-2 px-2 md:px-16 flex items-center justify-between">
             <a href="https://open.spotify.com/">
                 <img src={logo} alt='logo' className='h-9' />
             </a>
@@ -76,14 +78,15 @@ const Header = () => {
                     </button>
                 </div>
                 <button className={showToggleBtn ? "block" : "hidden"} onClick={toggleMenu} >
-                    {showMenu ?
-                        <img src={showMobileMenu} alt='show menu button' />
-                        :
-                        <img src={hideMobileMenu} alt='hide menu button' />
-                    }
+                    <img
+                        src={showMenu ? showMobileMenu : hideMobileMenu}
+                        alt={showMenu ? 'show menu button' : 'hide menu button'}
+                        className={menuToggleAnimation ? 'animate-flip-vertical-right' : ''}
+                        onAnimationEnd={() => setMenuToggleAnimation(false)}
+                    />
                 </button>
             </nav>
-        </header >
+        </header>
     );
 };
 

@@ -8,7 +8,7 @@ const UserInfoSection = () => {
     const profile = useFetchData(fetchProfile, 'item');
 
     return (
-        <Container title={""} className={'row-span-3 h-[85vh] text-white'}>
+        <Container title={""} className={'row-span-auto sm:row-span-3 h-[85vh] text-white'}>
             {profile
                 ?
                 <div className="flex flex-col justify-between space-y-4">
