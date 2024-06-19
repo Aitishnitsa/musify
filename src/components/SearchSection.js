@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "./Container";
 import Table from "./Table";
-import { accessToken, fetchSearch } from '../config';
+import { fetchSearch } from '../config';
+import { PlayerContext } from "../context/PlayerContext";
 
 const SearchSection = () => {
     const [query, setQuery] = useState("");
     const [searchResult, setSearchResult] = useState([]);
+    const { token } = useContext(PlayerContext);
 
     const handleInputChange = (e) => {
         e.preventDefault();
@@ -14,9 +16,9 @@ const SearchSection = () => {
 
     useEffect(() => {
         const fetchQuery = async () => {
-            if (accessToken && query !== "") {
+            if (token && query !== "") {
                 try {
-                    const response = await fetchSearch(query);
+                    const response = await fetchSearch(token, query);
                     if (response && response.tracks && response.tracks.items) {
                         setSearchResult(response.tracks.items);
                     } else {
@@ -29,7 +31,7 @@ const SearchSection = () => {
         }
 
         fetchQuery();
-    }, [accessToken, query]);
+    }, [token, query]);
 
     return (
         <Container title={""} className={'col-span-1 sm:col-span-3 h-[65vh] sm:h-[85vh] overflow-y-auto'}>
