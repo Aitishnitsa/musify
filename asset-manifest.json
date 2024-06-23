@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/musify/static/css/main.7a07b1eb.css",
+    "main.js": "/musify/static/js/main.c241982b.js",
+    "static/js/453.537e0907.chunk.js": "/musify/static/js/453.537e0907.chunk.js",
+    "static/media/logo.svg": "/musify/static/media/logo.e6b70f9a4f9dc6578abbe1c0194c3b51.svg",
+    "static/media/accountMenuItem.svg": "/musify/static/media/accountMenuItem.0e96a8e8648761b72e19577aafcacde7.svg",
+    "static/media/time.svg": "/musify/static/media/time.949f930c92ad8efe45bba28cfeb3b8df.svg",
+    "static/media/homeMenuItem.svg": "/musify/static/media/homeMenuItem.8c544d3ceb08c00f62253009a7d4d69b.svg",
+    "static/media/queue.svg": "/musify/static/media/queue.c177a476871af3a97b108abfc2512d81.svg",
+    "index.html": "/musify/index.html",
+    "static/media/showMobileMenu.svg": "/musify/static/media/showMobileMenu.5a5a4c57db7049631bb90435019b2c52.svg",
+    "static/media/searchMenuItem.svg": "/musify/static/media/searchMenuItem.bad40c37186c66b223a6488182f4fd55.svg",
+    "static/media/search.svg": "/musify/static/media/search.2bb7c0cf59c55888bdca6b6501e0a96e.svg",
+    "static/media/hideMobileMenu.svg": "/musify/static/media/hideMobileMenu.773ab56b970c4247591679fe9c5c57f7.svg",
+    "static/media/play.svg": "/musify/static/media/play.a403065712efb44e3db2a467a122a208.svg",
+    "static/media/exit.svg": "/musify/static/media/exit.d2bb7b7d18b2a6d36faa535fc4ebb84c.svg",
+    "static/media/next.svg": "/musify/static/media/next.252c7f395878e4212d0502be92ea811e.svg",
+    "static/media/previous.svg": "/musify/static/media/previous.e94be12111de9932d111ddb156ff157e.svg",
+    "static/media/playlist.svg": "/musify/static/media/playlist.95987921e069506ffac5cbe5edc24783.svg",
+    "static/media/arrowDown.svg": "/musify/static/media/arrowDown.5585732f60c865226fd6cef9c2ba9d34.svg",
+    "static/media/arrowUp.svg": "/musify/static/media/arrowUp.bf41bdd6627d9c72bcf514e7cf46d043.svg",
+    "static/media/pause.svg": "/musify/static/media/pause.5b3c00c7bb30f5c65f220bd05eb25f90.svg",
+    "main.7a07b1eb.css.map": "/musify/static/css/main.7a07b1eb.css.map",
+    "main.c241982b.js.map": "/musify/static/js/main.c241982b.js.map",
+    "453.537e0907.chunk.js.map": "/musify/static/js/453.537e0907.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7a07b1eb.css",
+    "static/js/main.c241982b.js"
+  ]
+}
