@@ -16,14 +16,6 @@ const SeekBar = ({ player, progress, duration }) => {
         await fetchSeek(newProgress);
     };
 
-    const handleSeek = async (e) => {
-        e.preventDefault();
-        const seekBar = e.currentTarget;
-        const clickPosition = e.clientX - seekBar.getBoundingClientRect().left;
-        const newProgress = Math.round((clickPosition / seekBar.offsetWidth) * duration);
-        await fetchSeek(newProgress);
-    };
-
     const currentTime = player ? msToTime(progress) : "00:00";
     const trackLength = player ? msToTime(duration) : "00:00";
 
