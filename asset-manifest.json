@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/musify/static/css/main.7a07b1eb.css",
-    "main.js": "/musify/static/js/main.c241982b.js",
+    "main.js": "/musify/static/js/main.91c5d209.js",
     "static/js/453.537e0907.chunk.js": "/musify/static/js/453.537e0907.chunk.js",
     "static/media/logo.svg": "/musify/static/media/logo.e6b70f9a4f9dc6578abbe1c0194c3b51.svg",
     "static/media/accountMenuItem.svg": "/musify/static/media/accountMenuItem.0e96a8e8648761b72e19577aafcacde7.svg",
@@ -22,11 +22,11 @@
     "static/media/arrowUp.svg": "/musify/static/media/arrowUp.bf41bdd6627d9c72bcf514e7cf46d043.svg",
     "static/media/pause.svg": "/musify/static/media/pause.5b3c00c7bb30f5c65f220bd05eb25f90.svg",
     "main.7a07b1eb.css.map": "/musify/static/css/main.7a07b1eb.css.map",
-    "main.c241982b.js.map": "/musify/static/js/main.c241982b.js.map",
+    "main.91c5d209.js.map": "/musify/static/js/main.91c5d209.js.map",
     "453.537e0907.chunk.js.map": "/musify/static/js/453.537e0907.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7a07b1eb.css",
-    "static/js/main.c241982b.js"
+    "static/js/main.91c5d209.js"
   ]
 }
