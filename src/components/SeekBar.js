@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { fetchSeek } from "../config";
+import { msToTime, fetchSeek } from "../config";
 
 const SeekBar = ({ player, progress, duration }) => {
     const [lineWidth, setLineWidth] = useState(0);
 
     useEffect(() => {
         setLineWidth((progress * 100) / duration);
-    }, [progress]);
-
-    const msToTime = (duration) => {
-        let seconds = parseInt((duration / 1000) % 60);
-        let minutes = parseInt((duration / (1000 * 60)) % 60);
-
-        minutes = (minutes < 10) ? "0" + minutes : minutes;
-        seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-        return minutes + ":" + seconds;
-    }
+    }, [progress, duration]);
 
     const handleSeek = async (e) => {
         e.preventDefault();
