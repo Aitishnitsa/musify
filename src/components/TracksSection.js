@@ -15,7 +15,7 @@ const TracksSection = ({ playlist_id }) => {
         <Container title={""} className={'col-span-1 sm:col-span-3 h-[65vh] sm:h-[85vh] overflow-y-auto'}>
             {currentPlaylist && tracks ? (
                 <div className='h-full'>
-                    <div className="flex items-center py-2 border border-transparent border-b-customGreen">
+                    <div className="animate-fade background-customBlack flex items-center py-2 border border-transparent border-b-customGreen">
                         <img
                             src={currentPlaylist.images[0]?.url}
                             alt="song"
@@ -33,7 +33,7 @@ const TracksSection = ({ playlist_id }) => {
                     <table className="table-auto text-white w-full text-sm text-left">
                         <tbody>
                             {tracks.map((item, index) => (
-                                <tr key={index} className="rounded transition ease-in-out delay-50 hover:bg-black">
+                                <tr key={index} className={`animate-fade-down animete-duration-${index * 100} animate-delay-${index * 100} rounded transition ease-in-out delay-50 hover:bg-black`}>
                                     <td className="pl-1.5">{index + 1}</td>
                                     <td className="truncate max-w-48">
                                         <ListItem

@@ -33,9 +33,11 @@ const Header = () => {
     }, [screenSize.width]);
 
     const handleMouse = (index, state) => {
-        const newHoveredItems = [...hoveredItems];
-        newHoveredItems[index] = state;
-        setHoveredItems(newHoveredItems);
+        if (screenSize.width > 768) {
+            const newHoveredItems = [...hoveredItems];
+            newHoveredItems[index] = state;
+            setHoveredItems(newHoveredItems);
+        }
     };
 
     const menuItems = [
@@ -62,7 +64,7 @@ const Header = () => {
                 <img src={logo} alt='logo' className='h-9' />
             </a>
             <nav className='flex'>
-                <div className={`${showMenu && showToggleBtn ? "hidden" : "block"} flex space-x-1 md:space-x-2`}>
+                <div className={`${showMenu && showToggleBtn ? "hidden" : "block"} animate-slide-in-right flex space-x-1 md:space-x-2`}>
                     {menuItems.map((item, index) => (
                         <Link to={item.path} key={index}>
                             <div className="relative flex items-center w-full bg-white rounded-full transition ease-in-out delay-500 hover:animate-fade-left animate-duration-100"
