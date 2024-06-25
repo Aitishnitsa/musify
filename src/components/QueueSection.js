@@ -16,7 +16,7 @@ const QueueSection = ({ onCurrentClick }) => {
                 Черга
             </span>
         </div>}
-            className={'col-span-1 sm:col-span-2 h-[10vh] sm:h-[85vh] overflow-y-auto'}>
+            className={'hidden sm:block col-span-2 h-[85vh] overflow-y-auto'}>
             {queue.length === 0 ? (
                 <Loader />
             ) : (
