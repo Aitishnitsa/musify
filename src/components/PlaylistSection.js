@@ -26,7 +26,7 @@ const PlaylistSection = ({ onClick }) => {
                         <ListItem
                             key={playlist?.id}
                             imgUrl={playlist?.images[0]?.url}
-                            song={playlist.name}
+                            song={playlist?.name}
                             artist={`Плейлист ${playlist?.owner?.display_name}`}
                             className={'max-w-56'}
                             onClick={() => onClick(playlist?.id)}
