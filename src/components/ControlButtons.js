@@ -7,7 +7,7 @@ import { fetchPlayPause, fetchNextPrevious } from '../config';
 import { PlayerContext } from "../context/PlayerContext";
 
 const ControlButtons = () => {
-    const { isPlaying } = useContext(PlayerContext);
+    const { isPlaying, setIsPlaying } = useContext(PlayerContext);
 
     const handlePrevious = async (e) => {
         e.preventDefault();
@@ -18,6 +18,7 @@ const ControlButtons = () => {
         e.preventDefault();
         const action = isPlaying ? "pause" : "play";
         await fetchPlayPause(action);
+        setIsPlaying(!isPlaying);
     }
 
     const handleNext = async (e) => {

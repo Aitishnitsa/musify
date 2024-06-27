@@ -33,11 +33,15 @@ export const PlayerProvider = ({ children }) => {
 
     useEffect(() => {
         fetchPlayerData();
-        fetchQueueData();
     }, [token]);
 
     useEffect(() => {
-        const interval = setInterval(fetchPlayerData, 1000);
+        let interval;
+        if (isPlaying) {
+            interval = setInterval(fetchPlayerData, 1000);
+        } else {
+            fetchPlayerData();
+        }
         return () => clearInterval(interval);
     }, [isPlaying]);
 
@@ -46,7 +50,7 @@ export const PlayerProvider = ({ children }) => {
     }, [currentSongId]);
 
     return (
-        <PlayerContext.Provider value={{ player, queue, isPlaying, fetchQueueData }}>
+        <PlayerContext.Provider value={{ player, queue, isPlaying, setIsPlaying, fetchQueueData }}>
             {children}
         </PlayerContext.Provider>
     );
