@@ -29,6 +29,16 @@ module.exports = {
             opacity: 1
           },
         },
+        'slide-in-bottom': {
+          '0%': {
+            transform: 'translateY(1000px)',
+            opacity: 0
+          },
+          '100%': {
+            transform: 'translateY(0)',
+            opacity: 1
+          }
+        },
         'slide-out-bottom': {
           '0%': {
             transform: 'translateY(0)',
@@ -54,6 +64,7 @@ module.exports = {
         'color-change-2x': 'color-change-2x 5s linear infinite alternate both',
         'flip-vertical-right': 'flip-vertical-right 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both',
         'slide-in-right': 'slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        'slide-in-bottom': 'slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
         'slide-out-bottom': 'slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both',
         'flip-out-hor-bottom': 'flip-out-hor-bottom 0.45s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'
       },

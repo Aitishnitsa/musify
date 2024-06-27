@@ -11,7 +11,7 @@ const Footer = () => {
     const { player } = useContext(PlayerContext);
 
     return (<>
-        <footer className={`${isHidden ? `animate-slide-out-bottom` : `animate-fade-up`} fixed bottom-0 border-2 border-transparent border-t-customGreen w-full bg-customBlack m-0 py-2 px-2 md:px-16`} >
+        <footer className={`${isHidden ? `animate-slide-out-bottom` : `animate-slide-in-bottom`} fixed bottom-0 border-2 border-transparent border-t-customGreen w-full bg-customBlack m-0 py-2 px-2 md:px-16`} >
             <div className="relative flex items-center justify-between">
                 <div className="w-2/3">
                     <ListItem
@@ -33,7 +33,7 @@ const Footer = () => {
                 duration={player?.item?.duration_ms}
             />
         </footer >
-        <div className={`${isHidden ? `animate-flip-down` : `animate-flip-out-hor-bottom`} fixed bottom-0 w-full flex justify-end m-0 py-2 px-2 md:px-16`}>
+        <div className={`${isHidden ? `animate-slide-in-bottom` : `animate-flip-out-hor-bottom`} fixed bottom-0 w-full flex justify-end m-0 py-2 px-2 md:px-16`}>
             <button onClick={() => setIsHidden(false)}>
                 <img src={arrowUp} alt='show footer' className="h-6 w-6 sm:h-9 sm:w-9" />
             </button>

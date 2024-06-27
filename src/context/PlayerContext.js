@@ -36,12 +36,7 @@ export const PlayerProvider = ({ children }) => {
     }, [token]);
 
     useEffect(() => {
-        let interval;
-        if (isPlaying) {
-            interval = setInterval(fetchPlayerData, 1000);
-        } else {
-            fetchPlayerData();
-        }
+        let interval = isPlaying ? setInterval(fetchPlayerData, 1000) : fetchPlayerData();
         return () => clearInterval(interval);
     }, [isPlaying]);
 
